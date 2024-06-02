@@ -1,0 +1,16 @@
+{
+  "urls": {
+    "dev": "https://www.saucedemo.com/",
+    "qa": "https://demoqa.com/"
+  },
+  "users": [
+    {
+      "username":"standard_user",
+      "password":"secret_sauce"
+    },
+    {
+      "username":"visual_user",
+      "password":"secret_sauce"
+    }
+  ]
+}

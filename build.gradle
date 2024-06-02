@@ -1,19 +1,67 @@
 plugins {
     id 'java'
+    id 'application'
 }
-
-group 'org.example'
-version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.17.1'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.17.1'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.17.1'
+
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.23.1'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.23.1'
+
+    implementation group: 'com.codeborne', name: 'selenide', version: '7.3.2'
+    implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 test {
     useJUnitPlatform()
+}
+
+task testWithEnvironment(type: Test) {
+    def defaultEnvironment = readEnvironmentFromProperties()
+    def environment = System.getProperty('environment', defaultEnvironment)
+
+    if (environment == null || environment.isEmpty()) {
+        environmenti = defaultEnvironment
+    }
+    systemProperty 'environment', environment
+    println "environment set for testing: $environment"
+    useJUnitPlatform()
+}
+
+test.dependsOn testWithEnvironment
+
+// Method to read environment from gradle.properties
+def readEnvironmentFromProperties() {
+    def properties = new Properties()
+    def defaultEnvironment = 'dev' // Default environment value
+    try {
+        def gradlePropertiesFile = file('gradle.properties')
+        if (gradlePropertiesFile.exists()) {
+            properties.load(new FileInputStream(gradlePropertiesFile))
+            def environment = properties.getProperty('environment', defaultEnvironment)
+            if (environment == null || environment.isEmpty()) {
+                environment = defaultEnvironment
+            }
+            return environment
+        }
+    } catch (IOException e) {
+        println "Error reading gradle.properties file: $e.message"
+    }
+    return defaultEnvironment
 }
