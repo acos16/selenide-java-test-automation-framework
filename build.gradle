@@ -19,7 +19,9 @@ dependencies {
     implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testImplementation group: 'org.junit.platform', name: 'junit-platform-suite-engine', version: '1.10.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
 
 }
 
@@ -32,19 +34,54 @@ test {
     useJUnitPlatform()
 }
 
-task testWithEnvironment(type: Test) {
+/*
+testWithEnvironment performs two important operations:
+1. can execute tests on given environment when -Denvironment is specified
+2. executes specific tests based on the set filter
+ */
+tasks.register('customTest', Test) {
+    // Read the environment from properties file or default it if not specified
     def defaultEnvironment = readEnvironmentFromProperties()
     def environment = System.getProperty('environment', defaultEnvironment)
 
     if (environment == null || environment.isEmpty()) {
-        environmenti = defaultEnvironment
+        environment = defaultEnvironment
     }
     systemProperty 'environment', environment
-    println "environment set for testing: $environment"
+    println "Environment set for testing: $environment"
+
     useJUnitPlatform()
+
+    // Determine the suite type, default to 'all'
+    def suiteType = project.hasProperty('suiteType') ? project.getProperty('suiteType') : 'all'
+    println "Suite type: $suiteType"
+
+    // Include the appropriate test suite based on the suite type
+    if (suiteType == 'smoke') {
+        include '**/SmokeTestSuite.class'
+    } else if (suiteType == 'regression') {
+        include '**/RegressionTestSuite.class'
+    } else if (suiteType == 'all') {
+        include '**/*.class'
+    } else {
+        throw new GradleException("Unknown suite type: ${suiteType}. Please specify 'smoke', 'regression', or 'all'.")
+    }
+
+    // Print included classes for debugging
+    doFirst {
+        println "Included test classes for suite: $suiteType"
+        fileTree('src/test/java').matching {
+            include '**/*.class'
+        }.each {
+            println it
+        }
+    }
 }
 
-test.dependsOn testWithEnvironment
+// Ensure that the default 'test' task depends on 'customTest'
+tasks.named('test') {
+    dependsOn 'customTest'
+}
 
 // Method to read environment from gradle.properties
 def readEnvironmentFromProperties() {

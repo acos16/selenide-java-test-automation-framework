@@ -35,3 +35,9 @@ environment = qa
 ```
 ./gradlew test -Denvironment=qa
 ```
+
+To run different test suites, you can
+
+```
+./gradlew test -PsuiteType=smoke
+```

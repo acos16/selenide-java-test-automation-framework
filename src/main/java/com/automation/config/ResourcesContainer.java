@@ -1,9 +1,14 @@
-package com.automation;
+package com.automation.config;
+
+import com.automation.User;
 
 import java.util.List;
 import java.util.Map;
 
-public class URLContainer {
+/**
+ * ResourcesContainer contains the entities from the configuration file
+ */
+public class ResourcesContainer {
     private Map<String, String> urls;
     private List<User> users;
 
@@ -22,4 +27,5 @@ public class URLContainer {
     public void setUsers(List<User> users) {
         this.users = users;
     }
+
 }

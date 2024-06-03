@@ -1,4 +1,4 @@
-package com.automation;
+package com.automation.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
@@ -8,20 +8,24 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ResourcesReader {
-
-    private static final Logger log = LogManager.getLogger(ResourcesReader.class);
+/**
+ * EnvironmentLoader class is used to load the environment: dev, qa, pre-prod, prod, etc. and the specific url of
+ * the test instance from the configuration file
+ */
+public class EnvironmentLoader {
+    private static final Logger log = LogManager.getLogger(EnvironmentLoader.class);
     private static final String DEFAULT_ENVIRONMENT = "dev";
+    private static final String RESOURCES_CONFIG = "config.json";
+    private static final String PROPERTIES = "gradle.properties";
 
-    private ResourcesReader() {
-        throw new IllegalStateException("Environment handler class");
+    private EnvironmentLoader() {
+        throw new UnsupportedOperationException("Utility class");
     }
 
-    // Method to read environment from gradle.properties
     public static String readEnvironmentFromProperties() {
         var properties = new Properties();
         String environment = null; //DEFAULT_ENVIRONMENT
-        try (var input = new FileInputStream("gradle.properties")) {
+        try (var input = new FileInputStream(PROPERTIES)) {
             properties.load(input);
             environment = properties.getProperty("environment");
             if (environment == null || environment.isEmpty()) {
@@ -35,15 +39,15 @@ public class ResourcesReader {
 
     public static String getEnvironment() {
         String url = null;
-        try (var inputStream = ResourcesReader.class.getClassLoader().getResourceAsStream("config.json")) {
+        try (var inputStream = EnvironmentLoader.class.getClassLoader().getResourceAsStream(RESOURCES_CONFIG)) {
             if (inputStream == null) {
                 log.error("File not found in resources.");
                 return null;
             }
             var environment = System.getProperty("environment", readEnvironmentFromProperties()); // Use system property if provided
             log.info("environment {}", environment);
-            var urlContainer = new ObjectMapper().readValue(inputStream, URLContainer.class);
-            url = urlContainer.getUrls().get(environment);
+            var resourcesContainer = new ObjectMapper().readValue(inputStream, ResourcesContainer.class);
+            url = resourcesContainer.getUrls().get(environment);
 
             if (url != null) {
                 log.info("URL for environment ({}): {}", environment, url);
@@ -56,11 +60,3 @@ public class ResourcesReader {
         return url;
     }
 }
-
-
-
-
-
-
-
-
