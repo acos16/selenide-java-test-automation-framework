@@ -10,6 +10,7 @@ src/main
 * pages
 * utils
 * exceptions
+* uiblocks
 
 src/test
 
@@ -24,6 +25,7 @@ Package Naming Conventions
 * pages: Contains Page Object classes representing different pages of the application under test.
 * utils: Contains utility classes and helper methods that can be used across the framework.
 * exceptions: Custom exception classes to handle specific errors within the framework.
+* uiblocks: Contains implementation of complex web elements
 * suites: Contains test suite definitions,
 
 The suites package in a test automation framework is used to group and organize tests into collections called test

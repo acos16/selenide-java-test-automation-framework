@@ -1,6 +1,6 @@
 package com.automation.config;
 
-import com.automation.User;
+import com.automation.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 /**
  * The UsersLoader class is responsible for loading user-related data (such as test users or credentials) from
@@ -29,7 +29,7 @@ public class UsersLoader {
                 log.error("File not found in resources.");
                 return Collections.emptyList();
             }
-            ResourcesContainer users = new ObjectMapper().readValue(inputStream, ResourcesContainer.class);
+            var users = new ObjectMapper().readValue(inputStream, ResourcesContainer.class);
             return users.getUsers();
         } catch (IOException e) {
             log.error("Cannot read file {}", CONFIG_FILE, e);
@@ -37,14 +37,17 @@ public class UsersLoader {
         }
     }
 
-    public static Optional<User> getStandardUser() {
+    public static User getStandardUser() {
         List<User> users = loadUsers();
-        return users.isEmpty() ? Optional.empty() : Optional.of(users.get(0));
+        Objects.requireNonNull(users);
+        return users.get(0);
     }
 
-    public static Optional<User> getVisualUser() {
+    public static User getVisualUser() {
         List<User> users = loadUsers();
-        return users.size() < 2 ? Optional.empty() : Optional.of(users.get(1));
+        Objects.requireNonNull(users);
+        if (users.size() < 2) throw new IndexOutOfBoundsException();
+        return users.get(1);
     }
 }
 

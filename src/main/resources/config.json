@@ -5,12 +5,16 @@
   },
   "users": [
     {
-      "username":"standard_user",
-      "password":"secret_sauce"
+      "username": "standard_user",
+      "password": "secret_sauce"
     },
     {
-      "username":"visual_user",
-      "password":"secret_sauce"
+      "username": "visual_user",
+      "password": "secret_sauce"
     }
-  ]
+  ],
+  "pages": {
+    "inventory": "https://www.saucedemo.com/inventory.html",
+    "products": "https://saucelabs.com/products"
+  }
 }

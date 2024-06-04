@@ -1,6 +1,6 @@
 package com.automation.config;
 
-import com.automation.User;
+import com.automation.entity.User;
 
 import java.util.List;
 import java.util.Map;
@@ -11,6 +11,7 @@ import java.util.Map;
 public class ResourcesContainer {
     private Map<String, String> urls;
     private List<User> users;
+    private Map<String, String> pages;
 
     public Map<String, String> getUrls() {
         return urls;
@@ -28,4 +29,11 @@ public class ResourcesContainer {
         this.users = users;
     }
 
+    public Map<String, String> getPages() {
+        return pages;
+    }
+
+    public void setPages(Map<String, String> pages) {
+        this.pages = pages;
+    }
 }
