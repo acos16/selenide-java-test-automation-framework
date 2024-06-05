@@ -7,7 +7,6 @@ import com.codeborne.selenide.WebDriverRunner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 
 import java.util.Objects;
 
@@ -23,7 +22,9 @@ public abstract class BasePage {
         Configuration.baseUrl = EnvironmentLoader.getEnvironment();
     }
 
-    protected abstract String getPageUrl();
+    public abstract String getPageUrl();
+
+    public abstract boolean isDisplayed();
 
     /**
      * Returns current url
@@ -45,17 +46,6 @@ public abstract class BasePage {
         } else {
             log.info(getClass().getSimpleName(), " {} was not loaded. Url differs from expected ");
         }
-    }
-
-
-    public void navigateTo(String url) {
-        //todo: add implementation
-    }
-
-    @BeforeEach
-    public void setUp() {
-
-        //Selenide.open();
     }
 
     @AfterEach

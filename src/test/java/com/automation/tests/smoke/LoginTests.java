@@ -21,10 +21,12 @@ class LoginTests implements IBaseTest {
     void verifyLoginToPageIsSuccessfulWithStandardUser() {
         assertEquals("dev", EnvironmentLoader.readEnvironmentFromProperties());
         loginPage.loadPage(loginPage.getPageUrl());
-        loginPage.loginAs(user);
+        loginPage.login(user);
         assertEquals("Products", inventoryPage.getPageTitle());
         inventoryPage.getSideBarMenu().openMenu();
         inventoryPage.getSideBarMenu().logout();
+
     }
+
 
 }

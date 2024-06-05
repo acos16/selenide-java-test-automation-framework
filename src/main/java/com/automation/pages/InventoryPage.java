@@ -4,6 +4,7 @@ import com.automation.base.BasePage;
 import com.automation.config.PagesLoader;
 import com.automation.uiblocks.SidebarMenu;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -32,6 +33,11 @@ public class InventoryPage extends BasePage {
     @Override
     public String getPageUrl() {
         return PagesLoader.loadPage().get("inventory");
+    }
+
+    @Override
+    public boolean isDisplayed() {
+        return $(By.className("inventory_list")).exists();
     }
 
     public SidebarMenu getSideBarMenu() {

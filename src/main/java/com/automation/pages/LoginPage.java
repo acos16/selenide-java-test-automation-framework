@@ -23,12 +23,17 @@ public class LoginPage extends BasePage {
         return EnvironmentLoader.getEnvironment();
     }
 
+    @Override
+    public boolean isDisplayed() {
+        return loginButton.exists();
+    }
+
     /**
      * This method allows the login into a page with different users
      *
      * @param user
      */
-    public void loginAs(User user) {
+    public void login(User user) {
         var username = UsersLoader.getStandardUser().getUsername();
         var password = UsersLoader.getStandardUser().getPassword();
         usernameField.setValue(username);
