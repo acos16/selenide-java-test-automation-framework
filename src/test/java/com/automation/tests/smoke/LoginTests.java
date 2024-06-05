@@ -23,6 +23,8 @@ class LoginTests implements IBaseTest {
         loginPage.loadPage(loginPage.getPageUrl());
         loginPage.loginAs(user);
         assertEquals("Products", inventoryPage.getPageTitle());
+        inventoryPage.getSideBarMenu().openMenu();
+        inventoryPage.getSideBarMenu().logout();
     }
 
 }

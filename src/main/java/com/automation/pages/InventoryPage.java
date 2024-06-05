@@ -2,13 +2,15 @@ package com.automation.pages;
 
 import com.automation.base.BasePage;
 import com.automation.config.PagesLoader;
+import com.automation.uiblocks.SidebarMenu;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$;
 
 public class InventoryPage extends BasePage {
 
-    private SelenideElement title = $(".title");
+    private final SelenideElement title = $(".title");
+    private SidebarMenu sideBarMenu = new SidebarMenu();
 
     /**
      * This method get the page's title
@@ -31,5 +33,10 @@ public class InventoryPage extends BasePage {
     public String getPageUrl() {
         return PagesLoader.loadPage().get("inventory");
     }
+
+    public SidebarMenu getSideBarMenu() {
+        return sideBarMenu;
+    }
+
 }
 

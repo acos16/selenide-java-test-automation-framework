@@ -54,7 +54,8 @@ public abstract class BasePage {
 
     @BeforeEach
     public void setUp() {
-        Selenide.open();
+
+        //Selenide.open();
     }
 
     @AfterEach
