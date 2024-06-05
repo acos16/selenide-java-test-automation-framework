@@ -1,5 +1,6 @@
 package com.automation.tests.regression;
 
+import com.automation.base.IBaseTest;
 import com.automation.config.EnvironmentLoader;
 import com.automation.pages.InventoryPage;
 import com.automation.utils.Utils;
@@ -9,7 +10,7 @@ import static com.codeborne.selenide.Condition.text;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class CartTests {
+class CartTests implements IBaseTest {
 
     private final InventoryPage inventoryPage = new InventoryPage();
 
