@@ -24,7 +24,7 @@ public class EnvironmentLoader {
 
     public static String readEnvironmentFromProperties() {
         var properties = new Properties();
-        String environment = null; //DEFAULT_ENVIRONMENT
+        String environment = null;
         try (var input = new FileInputStream(PROPERTIES)) {
             properties.load(input);
             environment = properties.getProperty("environment");
