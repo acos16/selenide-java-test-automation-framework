@@ -1,6 +1,7 @@
 package com.automation.base;
 
 import com.automation.config.EnvironmentLoader;
+import com.automation.pages.LoginPage;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
@@ -28,6 +29,7 @@ public abstract class BasePage {
 
     private static void setupBrowser() {
         String browser = System.getProperty("browser", "chrome"); // default to chrome if not specified
+
         switch (browser.toLowerCase()) {
             case "chrome" -> Configuration.browser = "chrome";
             case "firefox" -> Configuration.browser = "firefox";
@@ -40,6 +42,8 @@ public abstract class BasePage {
     public abstract String getPageUrl();
 
     public abstract boolean isDisplayed();
+
+    public abstract boolean isLoggedIn();
 
     /**
      * Returns current url
@@ -60,6 +64,32 @@ public abstract class BasePage {
             log.debug("{} was successfully loaded.", url);
         } else {
             log.info(getClass().getSimpleName(), " {} was not loaded. Url differs from expected ");
+            navigateToPageWithLogin(); //will login as standard user
+        }
+    }
+
+    public void navigateToPageWithLogin() {
+        Selenide.open(getPageUrl());
+
+        if (!isLoggedIn()) {
+            log.debug("User is not logged in. Logging in as standard user.");
+            LoginPage loginPage = new LoginPage();
+            Selenide.open(loginPage.getPageUrl());
+
+            if (loginPage.isDisplayed()) {
+                loginPage.loginAsStandardUser();
+                Selenide.open(getPageUrl());
+
+                if (isLoggedIn()) {
+                    log.debug("{} was successfully loaded.", getPageUrl());
+                } else {
+                    log.error("Failed to load {} after login.", getPageUrl());
+                }
+            } else {
+                log.error("Login page is not displayed.");
+            }
+        } else {
+            log.debug("User is already logged in.");
         }
     }
 

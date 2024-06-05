@@ -3,15 +3,19 @@ package com.automation.pages;
 import com.automation.base.BasePage;
 import com.automation.config.PagesLoader;
 import com.automation.uiblocks.SidebarMenu;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class InventoryPage extends BasePage {
 
     private final SelenideElement title = $(".title");
-    private SidebarMenu sideBarMenu = new SidebarMenu();
+    private final SidebarMenu sideBarMenu = new SidebarMenu();
+    private final ElementsCollection addToCartButtons = $$("button[id^='add-to-cart']");
+    private final SelenideElement shoppingCart = $(".shopping_cart_badge");
 
     /**
      * This method get the page's title
@@ -40,8 +44,21 @@ public class InventoryPage extends BasePage {
         return $(By.className("inventory_list")).exists();
     }
 
+    @Override
+    public boolean isLoggedIn() {
+        return isDisplayed();
+    }
+
     public SidebarMenu getSideBarMenu() {
         return sideBarMenu;
+    }
+
+    public ElementsCollection getAddToCartButton() {
+        return addToCartButtons;
+    }
+
+    public SelenideElement getShoppingCart() {
+        return shoppingCart;
     }
 
 }

@@ -9,9 +9,9 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.$;
 
 public class LoginPage extends BasePage {
-    private SelenideElement usernameField = $("#user-name");
-    private SelenideElement passwordField = $("#password");
-    private SelenideElement loginButton = $("#login-button");
+    private final SelenideElement usernameField = $("#user-name");
+    private final SelenideElement passwordField = $("#password");
+    private final SelenideElement loginButton = $("#login-button");
 
     /**
      * This method retrieves the start page url, which is the login page
@@ -28,16 +28,30 @@ public class LoginPage extends BasePage {
         return loginButton.exists();
     }
 
+    @Override
+    public boolean isLoggedIn() {
+        // This is not applicable for LoginPage
+        return false;
+    }
+
     /**
      * This method allows the login into a page with different users
      *
      * @param user
      */
     public void login(User user) {
-        var username = UsersLoader.getStandardUser().getUsername();
-        var password = UsersLoader.getStandardUser().getPassword();
-        usernameField.setValue(username);
-        passwordField.setValue(password);
+        usernameField.setValue(user.getUsername());
+        passwordField.setValue(user.getPassword());
         loginButton.click();
     }
+
+    /**
+     * This method logins with standard User
+     */
+    public void loginAsStandardUser() {
+        User standardUser = UsersLoader.getStandardUser();
+        login(standardUser);
+    }
+
+
 }
