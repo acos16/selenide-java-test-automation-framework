@@ -18,8 +18,23 @@ public abstract class BasePage {
 
     public static final Logger log = LogManager.getLogger(BasePage.class);
 
+    static {
+        setupBrowser();
+    }
+
     protected BasePage() {
         Configuration.baseUrl = EnvironmentLoader.getEnvironment();
+    }
+
+    private static void setupBrowser() {
+        String browser = System.getProperty("browser", "chrome"); // default to chrome if not specified
+        switch (browser.toLowerCase()) {
+            case "chrome" -> Configuration.browser = "chrome";
+            case "firefox" -> Configuration.browser = "firefox";
+            case "edge" -> Configuration.browser = "edge";
+            case "safari" -> Configuration.browser = "safari";
+            default -> throw new IllegalArgumentException("Unsupported browser: " + browser);
+        }
     }
 
     public abstract String getPageUrl();

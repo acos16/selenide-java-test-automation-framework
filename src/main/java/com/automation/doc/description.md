@@ -108,3 +108,9 @@ To run different test suites, you can
 ```
 ./gradlew test -PsuiteType=smoke
 ```
+
+To run test suites on different browser:
+
+```
+./gradlew test -Dbrowser=firefox
+```
