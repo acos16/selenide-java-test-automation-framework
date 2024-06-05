@@ -23,6 +23,7 @@ jobs:
           java-version: '17'
 
       - name: Run smoke tests
+        uses: gradle/gradle-build-action@v2
         run: ./gradlew test -PsuiteType=smoke
 
       - name: Run regression tests
