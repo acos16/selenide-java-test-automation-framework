@@ -1,43 +1,32 @@
-## Automation framework with Selenide and Java
-
-In this repository you will learn:
-
-* what is Selenide
-* setting up (development) environment
-* basic structure of a test automation framework
-* how to perform UI testing with Selenide
-* UI locators
-* gradle
+### Test automation framework with Java and Selenide
 
 Viewing tutorials and watching videos on test automation can be a way to start, but practice makes perfect and often
-what is lacking is a concrete example on how to put everything together.
+what is lacking is a concrete example on how to put everything together (or focusing on too few or too simple examples).
 
-This sample project uses:
+A test automation framework is nothing more than a set of guidelines or rules used for creating and designing test
+cases. It is comprised of a combination of practices and tools or libraries that are designed to help QA engineers
+creating test scripts.
 
-* java
-* gradle
-* selenide
-* junit
+These guidelines can include coding standards and conventions, how to handle test-data how to organize test logic and
+test ma, how to processes the test results, or how to access various resources.
 
-Since you've landed on GitHub I will start from the premise that some (basic) knowledge about version control systems
-and the automation ecosystem are known.
+Technologies used in this repository:
 
-To run with a different environment, you can
+* Java
+* Selenide
+* Gradle
+* Junit5
+* Log4j
+* Jackson
 
-1. update the gradle.properties file before running the tests
+Since you've landed on GitHub I will start from the premise that some (basic)
+knowledge about programming, version control systems and the automation ecosystem
+(build management tools, tools for UI testing, locators, CI/CD just to name the most important ones) are known.
 
-```
-environment = qa
-```
+Details about the framework can be found [here](src/main/java/doc/decription.md).
 
-2. use following Gradle command:
+Capabilities the framework offers:
 
-```
-./gradlew test -Denvironment=qa
-```
-
-To run different test suites, you can
-
-```
-./gradlew test -PsuiteType=smoke
-```
+* Run on different instances : dev environment, etc
+* Run on different browsers
+* Run different groups of tests (test suites) using gradle tasks
