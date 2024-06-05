@@ -71,7 +71,7 @@ Organizing the tests in suites
       smoke tests, etc.
     * manage test execution of specific tests based on the requirement (e.g. smoke, etc)
     * apply different configurations for different suites (e.g., different environments or browsers).
-    * Parallel Execution: Configure test suites to run tests in parallel to reduce execution time.
+    * parallel Execution: Configure test suites to run tests in parallel to reduce execution time.
 
 In this sample project I organized the tests in 2 categories: smoke and regression. I’ve put the tests into separate
 packages, such as smoke for smoke tests and regression for regression tests. I used JUnit 5’s @SelectPackages annotation
