@@ -32,6 +32,8 @@ java {
 
 test {
     useJUnitPlatform()
+
+
 }
 
 /*
@@ -51,6 +53,9 @@ tasks.register('customTest', Test) {
     println "Environment set for testing: $environment"
 
     useJUnitPlatform()
+
+    systemProperty 'browser', System.getProperty('browser', 'chrome')
+    println("Running tests on browser: " + System.getProperty('browser'))
 
     // Determine the suite type, default to 'all'
     def suiteType = project.hasProperty('suiteType') ? project.getProperty('suiteType') : 'all'
@@ -102,3 +107,4 @@ def readEnvironmentFromProperties() {
     }
     return defaultEnvironment
 }
+
