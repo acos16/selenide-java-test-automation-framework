@@ -39,10 +39,25 @@ public abstract class BasePage {
         }
     }
 
+    /**
+     * Returns the URL of the page
+     *
+     * @return the page URL
+     */
     public abstract String getPageUrl();
 
+    /**
+     * Checks if the page is displayed by verifying a certain condition on the page
+     *
+     * @return true if page is displayed, false otherwise
+     */
     public abstract boolean isDisplayed();
 
+    /**
+     * Checks if the user is logged-in
+     *
+     * @return true if user is logged-in, false otherwise
+     */
     public abstract boolean isLoggedIn();
 
     /**
@@ -54,6 +69,11 @@ public abstract class BasePage {
         return WebDriverRunner.getWebDriver().getCurrentUrl();
     }
 
+    /**
+     * Loads the specific URL of the page
+     *
+     * @param url
+     */
     public void loadPage(String url) {
         Objects.requireNonNull(url);
 
