@@ -23,7 +23,7 @@ Since you've landed on GitHub I will start from the premise that some (basic)
 knowledge about programming, version control systems and the automation ecosystem
 (build management tools, tools for UI testing, locators, CI/CD just to name the most important ones) are known.
 
-Details about the framework can be found [here](doc/description.md).
+Details about the framework can be found [here](src/main/java/com/automation/doc/description.md).
 
 Capabilities the framework offers:
 
