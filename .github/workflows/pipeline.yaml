@@ -24,7 +24,11 @@ jobs:
 
       - name: Run smoke tests
         uses: gradle/gradle-build-action@v2
-        run: ./gradlew test -PsuiteType=smoke
+        with:
+          gradle-version: '7.5.1'
+          generate-job-summary: false
+          arguments: |
+            test -PsuiteType=smoke
 
       - name: Run regression tests
         run: ./gradlew test -PsuiteType=regression
