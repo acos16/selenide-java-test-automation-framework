@@ -7,8 +7,8 @@ A test automation framework is nothing more than a set of guidelines or rules us
 cases. It consists of a combination of practices and tools or libraries that are designed to help QA engineers creating
 test scripts.
 
-These guidelines can include coding standards and conventions, how to handle test-data how to organize test logic and
-test ma, how to process the test results, or how to access various resources.
+These guidelines can include coding standards and conventions, how to handle test-data, how to organize test logic and
+the test scenarios, how to process the test results, or how to access various resources.
 
 Technologies used in this repository:
 

@@ -2,7 +2,17 @@
 
 A well-organized folder structure for a test automation framework can significantly enhance maintainability and
 scalability. Here’s a recommended structure, along with suggestions for naming conventions:
-src/main config base pages utils extensions exceptions uiblocks entity src/test suites
+
+* config
+* base
+* pages
+* utils
+* extensions
+* exceptions
+* uiblocks
+* entity
+* tests
+* suites
 
 ### Package name explanation
 
@@ -10,22 +20,22 @@ Package Naming Conventions
 
 * config: Contains classes related to configuration, such as loading properties, setting up environment configurations,
   etc.
-* base: Contains base or abstract classes that other page classes can extend.Common functionality and utilities to be
-  shared across multiple page objects, should be placed in here (alternative packages can be named 'common')
+* base: Contains base or abstract classes that other page classes can extend. Common functionality and utilities to be
+  shared across multiple page objects, should be placed in here (alternative package can be named 'common').
 * pages: Contains Page Object classes representing different pages of the application under test.
 * utils: Contains utility classes and helper methods that can be used across the framework. Keep reusable utility
   methods in the utils package. This promotes code reuse and simplifies test class implementations.
 * exceptions: Custom exception classes to handle specific errors within the framework.
-* uiblocks: Contains implementation of complex web elements
-* entity: Contains the entities from the framework
-* extensions: It defines additional capabilities to be used across the framework
-* tests: contains the tests. It is good practice to separate the test logic from the tests scenarios
-* suites: Contains test suite definitions
+* uiblocks: Contains implementation of complex web elements.
+* entity: Contains the entities from the framework.
+* extensions: It defines additional capabilities to be used across the framework.
+* tests: Contains the tests. It is good practice separating the test logic from the tests scenarios.
+* suites: Contains test suite definitions.
 
 **Notes:**
 
 Page Object Model (POM): Implement the Page Object Model (POM) design pattern by creating page classes in the pages
-package. Each page class should encapsulate the behavior and elements of a specific page
+package. Each page class should encapsulate the behavior and elements of a specific page.
 
 ### Implementation explanations
 
@@ -69,20 +79,19 @@ Organizing the tests in suites
 * With Test suites you can:
     * define how and which tests should be run together, various criteria such as functional areas, regression tests,
       smoke tests, etc.
-    * manage test execution of specific tests based on the requirement (e.g. smoke, etc)
+    * manage test execution of specific tests based on the requirement (e.g. smoke, etc).
     * apply different configurations for different suites (e.g., different environments or browsers).
-    * parallel Execution: Configure test suites to run tests in parallel to reduce execution time.
+    * parallel execution: Configure test suites to run tests in parallel to reduce execution time.
 
-In this sample project I organized the tests in 2 categories: smoke and regression. I’ve put the tests into separate
-packages, such as smoke for smoke tests and regression for regression tests. I used JUnit 5’s @SelectPackages annotation
-to include all tests from those specific packages in your test suites. Ensure that smoke or regression tests are placed
-in the right packages.
+In this sample project I organized the tests in 2 categories. I’ve put the tests into separate packages, such as smoke
+for smoke tests and regression for regression tests. I used JUnit 5’s @SelectPackages annotation to include all tests
+from those specific packages in the test suites. Ensure that smoke or regression tests are placed in the right packages.
 
 Other possibilities exist too: grouping them based on functionality is also a good way to go.
 
 ## Running the tests
 
-To run with a different environment, you can update the gradle.properties file before running the tests
+To run with a different environment, you can update the gradle.properties file before running the tests.
 
 ```
 environment = qa
