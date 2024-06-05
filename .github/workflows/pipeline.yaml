@@ -1,12 +1,12 @@
 name: CI Pipeline
 
 on:
-  workflow_dispatch:
-    inputs:
-      testType:
-        description: 'Type of tests to run (smoke, regression, or all)'
-        required: false
-        default: 'all'
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -28,17 +28,8 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
-      - name: Run tests
-        run: |
-          if [ "${{ github.event.inputs.testType }}" = "smoke" ]; then
-            ./gradlew test -PsuiteType=smoke
-          elif [ "${{ github.event.inputs.testType }}" = "regression" ]; then
-            ./gradlew test -PsuiteType=regression
-          elif [ "${{ github.event.inputs.testType }}" = "all" ]; then
-            ./gradlew test
-          else
-            echo "Invalid test type provided"
-            exit 1
-          fi
-        env:
-          SUITE_TYPE: ${{ github.event.inputs.testType }}
+      - name: Run smoke tests
+        run: ./gradlew test -PsuiteType=smoke
+
+      - name: Run regression tests
+        run: ./gradlew test -PsuiteType=regression
