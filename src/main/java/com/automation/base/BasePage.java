@@ -25,6 +25,7 @@ public abstract class BasePage {
 
     protected BasePage() {
         Configuration.baseUrl = EnvironmentLoader.getEnvironment();
+        Configuration.headless = true;
     }
 
     private static void setupBrowser() {
