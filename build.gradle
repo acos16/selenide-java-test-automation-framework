@@ -53,7 +53,7 @@ tasks.register('customTest', Test) {
     println("Running tests on browser: $browser")
 
     // Determine the suite type, default to 'all'
-    def suiteType = project.hasProperty('suiteType') ? project.getProperty('suiteType') : 'all'
+    def suiteType = project.findProperty('suiteType') ? project.property('suiteType') : 'all'
     println "Suite type: $suiteType"
 
     // Include the appropriate test suite based on the suite type
@@ -70,7 +70,7 @@ tasks.register('customTest', Test) {
         }
         include(includePattern)
         println "Included test classes for suite: $suiteType"
-        
+
     }
 
     // Print included classes for debugging
