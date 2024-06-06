@@ -21,8 +21,6 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testImplementation group: 'org.junit.platform', name: 'junit-platform-suite-engine', version: '1.10.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-
-
 }
 
 java {
@@ -32,8 +30,7 @@ java {
 
 test {
     useJUnitPlatform()
-
-
+    onlyIf { !project.gradle.startParameter.taskNames.contains('customTest') }
 }
 
 tasks.register('customTest', Test) {
@@ -49,8 +46,11 @@ tasks.register('customTest', Test) {
 
     useJUnitPlatform()
 
-    systemProperty 'browser', System.getProperty('browser', 'chrome')
-    println("Running tests on browser: " + System.getProperty('browser'))
+    //Set default browser to chrome
+    def defaultBrowser = 'chrome'
+    def browser = System.getProperty('browser', defaultBrowser)
+    systemProperty 'browser', browser
+    println("Running tests on browser: $browser")
 
     // Determine the suite type, default to 'all'
     def suiteType = project.hasProperty('suiteType') ? project.getProperty('suiteType') : 'all'
@@ -64,7 +64,7 @@ tasks.register('customTest', Test) {
         } else if (suiteType == 'regression') {
             includePattern = '**/RegressionTestSuite*.class'
         } else if (suiteType == 'all') {
-            includePattern = '**/*Test*.class'
+            includePattern = '**/tests/**/*Test*.class'
         } else {
             throw new GradleException("Unknown suite type: ${suiteType}. Please specify 'smoke', 'regression', or 'all'.")
         }
@@ -106,5 +106,3 @@ def readEnvironmentFromProperties() {
     }
     return defaultEnvironment
 }
-
-
