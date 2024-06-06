@@ -36,11 +36,6 @@ test {
 
 }
 
-/*
-testWithEnvironment performs two important operations:
-1. can execute tests on given environment when -Denvironment is specified
-2. executes specific tests based on the set filter
- */
 tasks.register('customTest', Test) {
     // Read the environment from properties file or default it if not specified
     def defaultEnvironment = readEnvironmentFromProperties()
@@ -62,19 +57,23 @@ tasks.register('customTest', Test) {
     println "Suite type: $suiteType"
 
     // Include the appropriate test suite based on the suite type
-    if (suiteType == 'smoke') {
-        include '**/SmokeTestSuite.class'
-    } else if (suiteType == 'regression') {
-        include '**/RegressionTestSuite.class'
-    } else if (suiteType == 'all') {
-        include '**/*.class'
-    } else {
-        throw new GradleException("Unknown suite type: ${suiteType}. Please specify 'smoke', 'regression', or 'all'.")
+    doFirst {
+        def includePattern
+        if (suiteType == 'smoke') {
+            includePattern = '**/SmokeTestSuite*.class'
+        } else if (suiteType == 'regression') {
+            includePattern = '**/RegressionTestSuite*.class'
+        } else if (suiteType == 'all') {
+            includePattern = '**/*Test*.class'
+        } else {
+            throw new GradleException("Unknown suite type: ${suiteType}. Please specify 'smoke', 'regression', or 'all'.")
+        }
+        include(includePattern)
+        println "Included test classes for suite: $suiteType"
     }
 
     // Print included classes for debugging
-    doFirst {
-        println "Included test classes for suite: $suiteType"
+    doLast {
         fileTree('src/test/java').matching {
             include '**/*.class'
         }.each {
@@ -107,4 +106,5 @@ def readEnvironmentFromProperties() {
     }
     return defaultEnvironment
 }
+
 

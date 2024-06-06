@@ -27,8 +27,8 @@ class CartTests implements IBaseTest {
         if (addToCartButtons.size() == 0) throw new AssertionError("No items available");
         addToCartButtons.get(Utils.getRandomNumber(addToCartButtons.size())).click();
 
-        // AsseassertEqualsrt that the cart badge shows 1 item
-        assertEquals("1", inventoryPage.getItemsInShoppingCart(), "Number of items is shopping cart does not match");
+        // Assert that the cart badge shows 1 item
+        assertEquals("1", inventoryPage.getItemsInShoppingCart(), "Number of items in shopping cart does not match");
     }
 
 

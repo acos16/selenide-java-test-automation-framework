@@ -106,11 +106,11 @@ use following Gradle command:
 To run different test suites, you can
 
 ```
-./gradlew test -PsuiteType=smoke
+./gradlew customTest -PsuiteType=smoke
 ```
 
 To run test suites on different browser:
 
 ```
-./gradlew test -Dbrowser=firefox
+./gradlew customTest -Dbrowser=firefox
 ```
