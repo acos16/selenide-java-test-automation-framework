@@ -1,4 +1,4 @@
-name: CI Pipeline
+ame: CI Pipeline
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
   build:
@@ -35,13 +36,13 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: smoke-test-results
-          path: '**/build/test-results/customTest/TEST-*.xml'
+          path: build/reports/tests/customTest  # Path to HTML reports for smoke tests
 
       - name: Run regression tests
         uses: gradle/gradle-build-action@v3
         with:
           gradle-version: '8.1.1'
-          generate-job-summary: true
+          generate-job-summary: false
           arguments: |
             customTest -PsuiteType=regression -Dbrowser=chrome
 
@@ -50,4 +51,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: regression-test-results
-          path: '**/build/test-results/customTest/TEST-*.xml'
+          path: build/reports/tests/customTest  # Path to HTML reports for regression tests
