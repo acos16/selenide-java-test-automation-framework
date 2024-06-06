@@ -70,6 +70,7 @@ tasks.register('customTest', Test) {
         }
         include(includePattern)
         println "Included test classes for suite: $suiteType"
+        
     }
 
     // Print included classes for debugging
@@ -105,4 +106,8 @@ def readEnvironmentFromProperties() {
         println "Error reading gradle.properties file: $e.message"
     }
     return defaultEnvironment
+}
+
+tasks.register('cleanBuildDir', Delete) {
+    delete buildDir
 }
