@@ -6,7 +6,6 @@ import com.automation.pages.InventoryPage;
 import com.automation.utils.Utils;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -28,8 +27,8 @@ class CartTests implements IBaseTest {
         if (addToCartButtons.size() == 0) throw new AssertionError("No items available");
         addToCartButtons.get(Utils.getRandomNumber(addToCartButtons.size())).click();
 
-        // Assert that the cart badge shows 1 item
-        inventoryPage.getShoppingCart().shouldHave(text("1"));
+        // AsseassertEqualsrt that the cart badge shows 1 item
+        assertEquals("1", inventoryPage.getItemsInShoppingCart(), "Number of items is shopping cart does not match");
     }
 
 

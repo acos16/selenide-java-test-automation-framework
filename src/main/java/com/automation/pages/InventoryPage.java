@@ -61,5 +61,9 @@ public class InventoryPage extends BasePage {
         return shoppingCart;
     }
 
+    public String getItemsInShoppingCart() {
+        return shoppingCart.text();
+    }
+
 }
 
