@@ -32,8 +32,9 @@ jobs:
 
       - name: Run regression tests
         uses: gradle/gradle-build-action@v2
-        gradle-version: '7.5.1'
-        generate-job-summary: true
-        arguments: |
-          customTest -PsuiteType=regression -Dbrowser=chrome
+        with:
+          gradle-version: '7.5.1'
+          generate-job-summary: true
+          arguments: |
+            customTest -PsuiteType=regression -Dbrowser=chrome
 
