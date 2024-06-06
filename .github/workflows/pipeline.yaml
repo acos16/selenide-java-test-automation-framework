@@ -10,21 +10,6 @@ on:
       - main
       - develop
   workflow_dispatch: # Allows manual triggering of the workflow
-    inputs:
-      run-smoke:
-        description: "Smoke tests"
-        type: boolean
-        default: true
-        required: true
-      run-regression:
-        description: "Regression  tests"
-        type: boolean
-        default: false
-        required: true
-      environment:
-        description: "Environment to run tests (dev, qa)"
-        type: environment
-        required: true
 
 jobs:
   build:
