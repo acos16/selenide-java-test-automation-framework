@@ -41,13 +41,13 @@ jobs:
           path: build/reports/tests/customTest  # Path to HTML reports for smoke tests
 
       - name: Clean build directory
-          uses: gradle/gradle-build-action@v3
-          with:
-            gradle-version: '8.1.1'
-            generate-job-summary: false
-            arguments: |
-              cleanBuildDir
-              
+        uses: gradle/gradle-build-action@v3
+        with:
+          gradle-version: '8.1.1'
+          generate-job-summary: false
+          arguments: |
+            cleanBuildDir
+
       - name: Run regression tests
         uses: gradle/gradle-build-action@v3
         with:
