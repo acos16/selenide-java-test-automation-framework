@@ -28,5 +28,6 @@ Detailed documentation about the framework can be found [here](src/main/java/com
 ## Framework Capabilities
 
 * **Environment Flexibility**: Run tests on different instances, such as development or testing environments.
+* **Test Execution**: Running the tests is possible using GitHub Actions workflow.
 * **Browser Compatibility**: Execute tests on various browsers.
 * **Test Suite Management**: Run different groups of tests (test suites) using Gradle tasks.

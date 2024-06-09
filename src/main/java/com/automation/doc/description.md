@@ -146,3 +146,17 @@ or use the following Gradle command:
 ```
 ./gradlew customTest -Dbrowser=firefox
 ```
+
+## CI Pipeline
+
+The tests are automatically triggered by the GitHub Actions workflow on every push or pull request to `main` branch. You
+can also trigger the workflow manually from the GitHub Actions tab.
+
+The CI Pipeline ensures that tests are executed consistently with each build.
+
+### Steps:
+
+1. Checkout code: this step checks out the repository code so that it can be accessed by subsequent steps.
+2. Setup JDK: this step sets up Java Development Kit (JDK) which is required to run the tests.
+3. Run tests: this step runs the tests using the Gradle `customTest` task.
+4. Upload test results: this step uploads the test reports as an artifact.
