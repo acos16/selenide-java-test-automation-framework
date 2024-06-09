@@ -1,5 +1,18 @@
 # Test Automation Framework
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Folder Structure](#folder-structure)
+- [Package Descriptions](#package-descriptions)
+- [Implementation Details](#implementation-details)
+    - [Resources](#resources)
+    - [Main Components](#main-components)
+- [Test Organization](#test-organization)
+    - [Test Suites](#suites)
+- [Running the Tests](#running-the-tests)
+- [CI Pipeline](#ci-pipeline)
+
 ## Overview
 
 This framework is designed for UI test automation and contains some basic setups. It can be further extended and
