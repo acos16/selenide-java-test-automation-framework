@@ -1,32 +1,32 @@
-### Test automation framework with Java and Selenide
+# Test Automation Framework with Java and Selenide
 
-Viewing tutorials and watching videos on test automation can be a way to start, but practice makes perfect and often
-what is lacking is a concrete example on how to put everything together (or focusing on too few or too simple examples).
+## Overview
 
-A test automation framework is nothing more than a set of guidelines or rules used for creating and designing test
-cases. It consists of a combination of practices and tools or libraries that are designed to help QA engineers creating
-test scripts.
+Starting with tutorials and videos on test automation is beneficial, but true mastery comes with practice. Often, what's
+missing is a comprehensive example that demonstrates how to integrate various components into a cohesive framework,
+rather than focusing on overly simple or isolated examples.
 
-These guidelines can include coding standards and conventions, how to handle test-data, how to organize test logic and
-the test scenarios, how to process the test results, or how to access various resources.
+A test automation framework provides a set of guidelines or rules for creating and designing test cases. It combines
+best practices and tools or libraries to assist QA engineers in developing effective test scripts. These guidelines
+typically cover coding standards, test data management, organization of test logic and scenarios, test result
+processing, and resource access.
 
-Technologies used in this repository:
+## Technologies Used
 
 * Java
 * Selenide
 * Gradle
-* Junit5
+* JUnit 5
 * Log4j
 * Jackson
 
-Since you've landed on GitHub I will start from the premise that some (basic)
-knowledge about programming, version control systems and the automation ecosystem
-(build management tools, tools for UI testing, locators, CI/CD just to name the most important ones) are known.
+Assuming a basic understanding of programming, version control systems, and the automation ecosystem (including build
+management tools, UI testing tools, locators, and CI/CD) will be beneficial.
 
-Details about the framework can be found [here](src/main/java/com/automation/doc/description.md).
+Detailed documentation about the framework can be found [here](src/main/java/com/automation/doc/description.md).
 
-Capabilities the framework offers:
+## Framework Capabilities
 
-* Run on different instances : dev environment, etc
-* Run on different browsers
-* Run different groups of tests (test suites) using gradle tasks
+* **Environment Flexibility**: Run tests on different instances, such as development or testing environments.
+* **Browser Compatibility**: Execute tests on various browsers.
+* **Test Suite Management**: Run different groups of tests (test suites) using Gradle tasks.

@@ -1,115 +1,141 @@
-## Framework description
+# Test Automation Framework
+
+## Overview
+
+This framework is designed for UI test automation and contains some basic setups. It can be further extended and
+enhanced to accommodate more complex capabilities that would be required by a web application.
+
+### Folder Structure
 
 A well-organized folder structure for a test automation framework can significantly enhance maintainability and
 scalability. Here’s a recommended structure, along with suggestions for naming conventions:
 
-* config
-* base
-* pages
-* utils
-* extensions
-* exceptions
-* uiblocks
-* entity
-* tests
-* suites
+* `config`
+* `base`
+* `pages`
+* `utils`
+* `extensions`
+* `exceptions`
+* `uiblocks`
+* `entity`
+* `tests`
+* `suites`
 
-### Package name explanation
+### Package Descriptions
 
-Package Naming Conventions
+#### `config`
 
-* config: Contains classes related to configuration, such as loading properties, setting up environment configurations,
-  etc.
-* base: Contains base or abstract classes that other page classes can extend. Common functionality and utilities to be
-  shared across multiple page objects, should be placed in here (alternative package can be named 'common').
-* pages: Contains Page Object classes representing different pages of the application under test.
-* utils: Contains utility classes and helper methods that can be used across the framework. Keep reusable utility
-  methods in the utils package. This promotes code reuse and simplifies test class implementations.
-* exceptions: Custom exception classes to handle specific errors within the framework.
-* uiblocks: Contains implementation of complex web elements.
-* entity: Contains the entities from the framework.
-* extensions: It defines additional capabilities to be used across the framework.
-* tests: Contains the tests. It is good practice separating the test logic from the tests scenarios.
-* suites: Contains test suite definitions.
+Contains classes for configuration management, including loading properties and setting up environment configurations.
 
-**Notes:**
+#### `base`
 
-Page Object Model (POM): Implement the Page Object Model (POM) design pattern by creating page classes in the pages
-package. Each page class should encapsulate the behavior and elements of a specific page.
+Includes base or abstract classes that other page classes can extend. Common functionalities and utilities shared across
+multiple page objects are placed here. Alternatively, this package can be named `common`.
 
-### Implementation explanations
+#### `pages`
 
-Resources
+Contains Page Object classes that represent different pages of the application under test, following the Page Object
+Model (POM) design pattern.
 
-* config.json contains the URLs for pages. These can also be relative to the base URL specified in urls
+#### `utils`
 
-Main
+Contains utility classes and helper methods that can be used across the framework. This promotes code reuse and
+simplifies test class implementations.
 
-* Contains **core** implementation to manage data (i. e.: resources loader) and to be able to work with the application
-  under test (configuration, pages, helpers, web components: tables, sidebars,etc.).
-* The pages extend base page: each page will load based on a given url that is specified in the config.json file. Pages
-  will also contain a 'isDisplayed' method which checks if the page is correctly loaded. This can be an element from the
-  page. There are other possible implementations for 'isdisplayed' method. In this example I am checking an item in the
-  page (a unique identifier specified to that page only). Other ways to do it: check page title, check page current url.
-  Or check page load status. This can be achieved using JavaScript:
+#### `exceptions`
 
+Contains custom exception classes to handle specific errors within the framework.
+
+#### `uiblocks`
+
+Implements complex web elements.
+
+#### `entity`
+
+Defines entities used within the framework.
+
+#### `extensions`
+
+Defines additional capabilities and extensions to be used across the framework.
+
+#### `tests`
+
+Contains the test cases. It is good practice to separate test logic from test scenarios.
+
+#### `suites`
+
+Defines test suite collections to organize and manage tests.
+
+### Implementation Details
+
+#### Resources
+
+* `config.json`: Contains the URLs for the environment and for the pages, which can be relative to the base URL
+  specified in `urls` and the Users of the application
+
+#### Main Components
+
+* **Core Implementation**: Manages data (e.g., resource loader) and facilitates interaction with the application under
+  test (e.g., configuration, pages, helpers, web components like tables and sidebars).
+* **Pages**: Extend the `BasePage` class, each page will load based on a given url that is specified in `config.json`.
+  Each page includes an `isDisplayed` method to verify correct loading, which can be implemented in various ways such as
+  checking a unique element, the page title, the current URL, or the page load status using JavaScript:
+
+```java
+public boolean isDisplayed(){
+        return executeJavaScript("return document.readyState").equals("complete");
+        }
 ```
-public boolean isDisplayed() {
-return executeJavaScript("return document.readyState").equals("complete");
-}
+
+or
+
+```java
+public boolean isDisplayed(){
+        return executeJavaScript("return performance.getEntriesByType('resource').length > 0;");
+        }
 ```
 
-Or
+* **CustomTestWatcher**: Implements the `TestWatcher` interface to log different test events such as start, success,
+  failure, abort, and disable.
 
-```
-public boolean isDisplayed() {
-return executeJavaScript("return performance.getEntriesByType('resource').length > 0;");
-}
-```
+#### Test Organization
 
-* CustomTestWatcher: Test watcher: a way for processing tests and test results. CustomTestWatcher: Implements the
-  TestWatcher interface. Logs different events such as test start, success, failure, abort, and disable.
+##### Suites
 
-Test
+The `suites` package groups and organizes tests into collections called test suites, offering better control and
+flexibility over test execution. Benefits include:
 
-Organizing the tests in suites
+* Defining how and which tests should run together based on various criteria (e.g., functional areas, regression tests,
+  smoke tests).
+* Managing test execution based on requirements (e.g., smoke tests).
+* Applying different configurations for different suites (e.g., different environments or browsers).
+* Configuring parallel execution to reduce execution time.
 
-* The suites package is used to group and organize tests into collections called test suites and gain better control and
-  flexibility over your test execution process, making it easier to manage large sets of tests.
-* With Test suites you can:
-    * define how and which tests should be run together, various criteria such as functional areas, regression tests,
-      smoke tests, etc.
-    * manage test execution of specific tests based on the requirement (e.g. smoke, etc).
-    * apply different configurations for different suites (e.g., different environments or browsers).
-    * parallel execution: Configure test suites to run tests in parallel to reduce execution time.
+In this project, tests are organized into two categories: `smoke` and `regression`. Tests are placed in respective
+packages, and JUnit 5's `@SelectPackages` annotation is used to include all tests from these packages in the test
+suites. It is also a good practice to group the tests based on functionality.
 
-In this sample project I organized the tests in 2 categories. I’ve put the tests into separate packages, such as smoke
-for smoke tests and regression for regression tests. I used JUnit 5’s @SelectPackages annotation to include all tests
-from those specific packages in the test suites. Ensure that smoke or regression tests are placed in the right packages.
+## Running the Tests
 
-Other possibilities exist too: grouping them based on functionality is also a good way to go.
-
-## Running the tests
-
-To run with a different environment, you can update the gradle.properties file before running the tests.
+To run tests with a different environment, update the `gradle.properties` file:
 
 ```
 environment = qa
 ```
 
-use following Gradle command:
+or use the following Gradle command:
 
 ```
 ./gradlew test -Denvironment=qa
 ```
 
-To run different test suites, you can
+To run different test suites:
 
 ```
 ./gradlew customTest -PsuiteType=smoke
 ```
 
-To run test suites on different browser:
+To run test suites on a different browser:
 
 ```
 ./gradlew customTest -Dbrowser=firefox
