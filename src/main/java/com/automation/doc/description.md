@@ -29,42 +29,42 @@ Contains classes for configuration management, including loading properties and 
 
 #### `base`
 
-Includes base or abstract classes that other page classes can extend. Common functionalities and utilities shared across
-multiple page objects are placed here. Alternatively, this package can be named `common`.
+* Includes base or abstract classes that other page classes can extend. Common functionalities and utilities shared
+  across multiple page objects are placed here. Alternatively, this package can be named `common`.
 
 #### `pages`
 
-Contains Page Object classes that represent different pages of the application under test, following the Page Object
-Model (POM) design pattern.
+* Contains Page Object classes that represent different pages of the application under test, following the Page Object
+  Model (POM) design pattern.
 
 #### `utils`
 
-Contains utility classes and helper methods that can be used across the framework. This promotes code reuse and
-simplifies test class implementations.
+* Contains utility classes and helper methods that can be used across the framework. This promotes code reuse and
+  simplifies test class implementations.
 
 #### `exceptions`
 
-Contains custom exception classes to handle specific errors within the framework.
+* Contains custom exception classes to handle specific errors within the framework.
 
 #### `uiblocks`
 
-Implements complex web elements.
+* Implements complex web elements.
 
 #### `entity`
 
-Defines entities used within the framework.
+* Defines entities used within the framework.
 
 #### `extensions`
 
-Defines additional capabilities and extensions to be used across the framework.
+* Defines additional capabilities and extensions to be used across the framework.
 
 #### `tests`
 
-Contains the test cases. It is good practice to separate test logic from test scenarios.
+* Contains the test cases. It is good practice to separate test logic from test scenarios.
 
 #### `suites`
 
-Defines test suite collections to organize and manage tests.
+* Defines test suite collections to organize and manage tests.
 
 ### Implementation Details
 
@@ -98,7 +98,7 @@ public boolean isDisplayed(){
 * **CustomTestWatcher**: Implements the `TestWatcher` interface to log different test events such as start, success,
   failure, abort, and disable.
 
-#### Test Organization
+### Test Organization
 
 ##### Suites
 
@@ -117,7 +117,9 @@ suites. It is also a good practice to group the tests based on functionality.
 
 ## Running the Tests
 
-To run tests with a different environment, update the `gradle.properties` file:
+#### Environment
+
+* To run tests with a different **environment**, update the `gradle.properties` file:
 
 ```
 environment = qa
@@ -125,17 +127,21 @@ environment = qa
 
 or use the following Gradle command:
 
-```
-./gradlew test -Denvironment=qa
-```
+  ```
+  ./gradlew test -Denvironment=qa
+  ```
 
-To run different test suites:
+#### Test suites
+
+* To run different test suites:
 
 ```
 ./gradlew customTest -PsuiteType=smoke
 ```
 
-To run test suites on a different browser:
+#### Browser
+
+* To run test suites on a different browser:
 
 ```
 ./gradlew customTest -Dbrowser=firefox
