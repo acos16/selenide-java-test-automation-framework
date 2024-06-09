@@ -18,10 +18,20 @@ public class EnvironmentLoader {
     private static final String RESOURCES_CONFIG = "config.json";
     private static final String PROPERTIES = "gradle.properties";
 
+    /**
+     * Private constructor to avoid instantiation of this utility class
+     *
+     * @throws UnsupportedOperationException if an attempt is made to instantiate the class.
+     */
     private EnvironmentLoader() {
         throw new UnsupportedOperationException("Utility class");
     }
 
+    /**
+     * Reads the environment setting from gradle.properties file.
+     *
+     * @return the environment specified in the file of default environment
+     */
     public static String readEnvironmentFromProperties() {
         var properties = new Properties();
         String environment = null;
@@ -37,6 +47,11 @@ public class EnvironmentLoader {
         return environment;
     }
 
+    /**
+     * Retrieves the URL of the environment.
+     *
+     * @return the URL of the specified environment or null if the URL cannot be found.
+     */
     public static String getEnvironment() {
         String url = null;
         try (var inputStream = EnvironmentLoader.class.getClassLoader().getResourceAsStream(RESOURCES_CONFIG)) {

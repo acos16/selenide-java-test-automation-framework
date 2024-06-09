@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class that contains tests for the Login page.
+ */
 class LoginTests implements IBaseTest {
 
     private final LoginPage loginPage = new LoginPage();

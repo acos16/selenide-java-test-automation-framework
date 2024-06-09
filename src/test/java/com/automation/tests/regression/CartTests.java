@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+/**
+ * Test class that contains tests for the inventory page functionality.
+ */
 class CartTests implements IBaseTest {
 
     private final InventoryPage inventoryPage = new InventoryPage();

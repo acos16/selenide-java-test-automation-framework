@@ -28,6 +28,13 @@ public abstract class BasePage {
         Configuration.headless = true;
     }
 
+
+    /**
+     * Setups the browser configuration based n the system property "browser".
+     * Defaults to Chrome is no browser is specified.
+     *
+     * @throws IllegalArgumentException if an unsupported is specified
+     */
     private static void setupBrowser() {
         String browser = System.getProperty("browser", "chrome"); // default to chrome if not specified
 
@@ -89,6 +96,11 @@ public abstract class BasePage {
         }
     }
 
+    /**
+     * Navigate to the page with login.
+     * If the user is not logged in, it will navigate
+     * to the login page and login with the standard user
+     */
     public void navigateToPageWithLogin() {
         Selenide.open(getPageUrl());
 
@@ -114,6 +126,9 @@ public abstract class BasePage {
         }
     }
 
+    /**
+     * Closes the web driver after each run
+     */
     @AfterEach
     public void afterRun() {
         Selenide.closeWebDriver();
