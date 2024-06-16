@@ -16,7 +16,7 @@
 ## Overview
 
 This framework is designed for UI test automation and contains some basic setups. It can be further extended and
-enhanced to accommodate more complex capabilities that would be required by a web application.
+enhanced to accommodate more complex capabilities that would be required for testing a web application.
 
 ### Folder Structure
 
@@ -38,7 +38,7 @@ scalability. Here’s a recommended structure, along with suggestions for naming
 
 #### `config`
 
-Contains classes for configuration management, including loading properties and setting up environment configurations.
+* Contains classes for configuration management, including loading properties and setting up environment configurations.
 
 #### `base`
 
