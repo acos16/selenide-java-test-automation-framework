@@ -99,8 +99,11 @@ jobs:
           path: build/test-results/customTest/*.xml
           reporter: java-junit
           fail-on-error: false
-      permissions:
-        id-token: write
-        contents: read
-        checks: write
+
+permissions:
+  id-token: write
+  contents: read
+  checks: write
+  actions: write
+  actions: write
 
