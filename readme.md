@@ -4,8 +4,8 @@
 
 This repository shows how to integrate various components into a cohesive framework.
 
-A test automation framework provides a set of guidelines or rules for creating and designing test cases. It combines
-best practices and tools or libraries to assist QA engineers in developing effective test scripts. These guidelines
+A test automation framework provides a set of guidelines or rules for creating and designing test scripts. It combines
+good practices and tools or libraries to assist Test Engineers in developing effective test scripts. These guidelines
 typically cover coding standards, test data management, organization of test logic and scenarios, test result
 processing, and resource access.
 
@@ -14,7 +14,7 @@ processing, and resource access.
 * Java
 * Selenide
 * Gradle
-* JUnit 5
+* JUnit
 * Log4j
 * Jackson
 
@@ -29,3 +29,11 @@ Detailed documentation about the framework can be found [here](src/main/java/com
 * **Test Execution**: Running the tests is possible using GitHub Actions workflow.
 * **Browser Compatibility**: Execute tests on various browsers.
 * **Test Suite Management**: Run different groups of tests (test suites) using Gradle tasks.
+
+## Contributing
+
+Contributions are welcome! Please fork the repository, create a new branch, and submit a pull request with your changes.
+
+## License
+
+This project is licensed under the MIT License.
