@@ -60,9 +60,14 @@ jobs:
         with:
           name: pmd-report
           path: build/reports/pmd/
+      - name: Upload PMD report
+        if: always()
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: build/reports/pmd/
+          retention-days: 7
 
       - name: Run smoke tests
-        #run: ./gradlew customTest -PsuiteType=smoke
         run: ./gradlew customTest -PsuiteType=smoke -Denv=${{ github.event.inputs.environment || env.DEFAULT_ENV }} -Dbrowser=${{ github.event.inputs.browser || env.DEFAULT_BROWSER  }}
 
       - name: Upload smoke test results
@@ -76,7 +81,6 @@ jobs:
         run: ./gradlew cleanBuildDir
 
       - name: Run regression tests
-        #run: ./gradlew customTest -PsuiteType=regression -Dbrowser=chrome
         run: ./gradlew customTest -PsuiteType=regression -Denv=${{ github.event.inputs.environment || env.DEFAULT_ENV }} -Dbrowser=${{ github.event.inputs.browser || env.DEFAULT_BROWSER  }}
 
       - name: Upload regression test results
@@ -85,3 +89,13 @@ jobs:
         with:
           name: regression-test-results
           path: build/reports/tests/customTest
+
+deploy:
+  runs-on: ubuntu-latest
+  needs: build
+  permissions:
+    pages: write
+    id-token: write
+  steps:
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v2
