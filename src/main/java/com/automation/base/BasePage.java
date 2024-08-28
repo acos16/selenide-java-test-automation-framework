@@ -15,9 +15,9 @@ public abstract class BasePage {
 
   public static final Logger log = LogManager.getLogger(BasePage.class);
 
-  static {
-    setupBrowser();
-  }
+//  static {
+//    setupBrowser();
+//  }
 
   protected BasePage() {
     Configuration.baseUrl = EnvironmentLoader.getEnvironment();
