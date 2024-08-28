@@ -61,13 +61,6 @@ jobs:
           name: pmd-report
           path: build/reports/pmd/
 
-      - name: Upload PMD report
-        if: always()
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: build/reports/pmd/
-          retention-days: 7
-
       - name: Run smoke tests
         run: ./gradlew customTest -PsuiteType=smoke -Denv=${{ github.event.inputs.environment || env.DEFAULT_ENV }} -Dbrowser=${{ github.event.inputs.browser || env.DEFAULT_BROWSER  }}
 
@@ -77,6 +70,15 @@ jobs:
         with:
           name: smoke-test-results
           path: build/reports/tests/customTest
+
+      - name: Test report smole tests
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Tests - Smoke
+          path: build/reports/tests/customTest/*.xml
+          reporter: junit
+          fail-on-error: false
 
       - name: Clean build directory
         run: ./gradlew cleanBuildDir
@@ -91,13 +93,13 @@ jobs:
           name: regression-test-results
           path: build/reports/tests/customTest
 
-      - name: Test report
+      - name: Test report regression tests
         uses: dorny/test-reporter@v1
         if: always()
         with:
           name: Tests
           path: build/test-results/customTest/*.xml
-          reporter: java-junit
+          reporter: junit
           fail-on-error: false
 
 permissions:
