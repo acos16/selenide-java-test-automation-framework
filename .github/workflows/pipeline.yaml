@@ -54,21 +54,12 @@ jobs:
       - name: Run PMD
         run: ./gradlew pmdMain pmdTest
 
-      - name: Upload PMD report as artifacts
+      - name: Upload PMD report as artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: pmd-report
           path: build/reports/pmd/
-
-      - name: Upload PMD report
-        uses: dorny/test-reporter@v1
-        if: always()
-        with:
-          name: PMD Report
-          path: build/reports/pmd/*.xml
-          reporter: java-junit
-          fail-on-error: false
 
       - name: Run smoke tests
         run: ./gradlew customTest -PsuiteType=smoke -Denv=${{ github.event.inputs.environment || env.DEFAULT_ENV }} -Dbrowser=${{ github.event.inputs.browser || env.DEFAULT_BROWSER  }}
