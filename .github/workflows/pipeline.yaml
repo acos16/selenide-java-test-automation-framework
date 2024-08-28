@@ -54,17 +54,26 @@ jobs:
       - name: Run PMD
         run: ./gradlew pmdMain pmdTest
 
-      - name: Upload PMD report
+      - name: Upload PMD report as artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: pmd-report
           path: build/reports/pmd/
 
+      - name: Upload PMD report
+          uses: dorny/test-reporter@v1
+          if: always()
+          with:
+            name: PMD Report
+            path: build/reports/pmd/*.xml
+            reporter: java-junit
+            fail-on-error: false
+
       - name: Run smoke tests
         run: ./gradlew customTest -PsuiteType=smoke -Denv=${{ github.event.inputs.environment || env.DEFAULT_ENV }} -Dbrowser=${{ github.event.inputs.browser || env.DEFAULT_BROWSER  }}
 
-      - name: Upload smoke test results
+      - name: Upload smoke test results as artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -75,7 +84,7 @@ jobs:
         uses: dorny/test-reporter@v1
         if: always()
         with:
-          name: Tests - Smoke
+          name: Smoke Tests
           path: build/test-results/customTest/*.xml
           reporter: java-junit
           fail-on-error: false
@@ -86,7 +95,7 @@ jobs:
       - name: Run regression tests
         run: ./gradlew customTest -PsuiteType=regression -Denv=${{ github.event.inputs.environment || env.DEFAULT_ENV }} -Dbrowser=${{ github.event.inputs.browser || env.DEFAULT_BROWSER  }}
 
-      - name: Upload regression test results
+      - name: Upload regression test results as artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -97,7 +106,7 @@ jobs:
         uses: dorny/test-reporter@v1
         if: always()
         with:
-          name: Tests
+          name: Regression Tests
           path: build/test-results/customTest/*.xml
           reporter: java-junit
           fail-on-error: false
