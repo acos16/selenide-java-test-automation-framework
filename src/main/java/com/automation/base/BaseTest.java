@@ -13,6 +13,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * </p>
  */
 @ExtendWith({CustomTestWatcher.class})
-public interface IBaseTest {
+public interface BaseTest {
 
 }

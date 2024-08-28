@@ -1,6 +1,6 @@
 package com.automation.tests.smoke;
 
-import com.automation.base.IBaseTest;
+import com.automation.base.BaseTest;
 import com.automation.config.EnvironmentLoader;
 import com.automation.config.UsersLoader;
 import com.automation.entity.User;
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Test class that contains tests for the Login page.
  */
-class LoginTests implements IBaseTest {
+class LoginTests implements BaseTest {
 
     private final LoginPage loginPage = new LoginPage();
     private final InventoryPage inventoryPage = new InventoryPage();
