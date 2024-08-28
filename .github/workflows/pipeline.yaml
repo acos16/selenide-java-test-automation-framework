@@ -60,6 +60,7 @@ jobs:
         with:
           name: pmd-report
           path: build/reports/pmd/
+
       - name: Upload PMD report
         if: always()
         uses: actions/upload-pages-artifact@v1
@@ -89,12 +90,16 @@ jobs:
         with:
           name: regression-test-results
           path: build/reports/tests/customTest
+
+      - name: Install github-actions-ctrf
+        run: npm install -g github-actions-ctrf
+
+      - name: Deploy to GitHub Pages
+        run: ctrf deploy --source build/reports/pmd/ --token ${{ secrets.GITHUB_TOKEN }}
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
     permissions:
       pages: write
       id-token: write
-    steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2
