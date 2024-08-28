@@ -89,13 +89,12 @@ jobs:
         with:
           name: regression-test-results
           path: build/reports/tests/customTest
-
-deploy:
-  runs-on: ubuntu-latest
-  needs: build
-  permissions:
-    pages: write
-    id-token: write
-  steps:
-    - name: Deploy to GitHub Pages
-      uses: actions/deploy-pages@v2
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
