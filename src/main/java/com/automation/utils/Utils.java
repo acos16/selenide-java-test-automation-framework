@@ -1,6 +1,7 @@
 package com.automation.utils;
 
 import java.util.Random;
+import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  * The Utils class provides utility methods to be used in the test automation framework.
@@ -39,4 +40,20 @@ public class Utils {
         return randomIndex;
     }
 
+    /**
+     * Genearates a random string
+     * @param length
+     * @return a random string with the specified length.
+     */
+    public static String getRandomString(int length) {
+        return RandomStringUtils.randomAlphabetic(length);
+    }
+
+    /**
+     * Generates a random email
+     * @return a random email with 10 characters
+     */
+    public static String getRandomEmail() {
+        return getRandomString(10) + "@example.com";
+    }
 }
