@@ -136,3 +136,27 @@ def readEnvironmentFromProperties() {
 tasks.register('cleanBuildDir', Delete) {
     delete buildDir
 }
+
+// Custom task to run smoke tests
+task smokeTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'smoke'
+    }
+    systemProperty 'env', project.hasProperty('env') ? project.env : project.property("env")
+    systemProperty 'browser', project.hasProperty('browser') ? project.browser : project.property("browser")
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+// Custom task to run regression tests
+task regressionTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'regression'
+    }
+    systemProperty 'env', project.hasProperty('env') ? project.env : project.property("env")
+    systemProperty 'browser', project.hasProperty('browser') ? project.browser : project.property("browser")
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
