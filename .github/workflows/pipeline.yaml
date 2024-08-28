@@ -77,7 +77,7 @@ jobs:
         with:
           name: Tests - Smoke
           path: build/test-results/customTest/*.xml
-          reporter: java-unit
+          reporter: java-junit
           fail-on-error: false
 
       - name: Clean build directory
@@ -99,7 +99,7 @@ jobs:
         with:
           name: Tests
           path: build/test-results/customTest/*.xml
-          reporter: java-unit
+          reporter: java-junit
           fail-on-error: false
 
 permissions:
