@@ -94,6 +94,13 @@ jobs:
       - name: Install github-actions-ctrf
         run: npm install -g github-actions-ctrf
 
+      - name: Run CTRF annotations
+        run: npx junit-to-ctrf test-results/customTest/*.xml -o ctrf/ctrf-report.json
+        if: always()
+
+      - name: Publish Test Summary Results
+        run: npx github-actions-ctrf ctrf/ctrf-report.json
+
       - name: Deploy to GitHub Pages
         run: ctrf deploy --source build/reports/pmd/ --token ${{ secrets.GITHUB_TOKEN }}
 
