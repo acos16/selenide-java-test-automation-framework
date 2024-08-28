@@ -71,13 +71,13 @@ jobs:
           name: smoke-test-results
           path: build/reports/tests/customTest
 
-      - name: Test report smole tests
+      - name: Test report smoke tests
         uses: dorny/test-reporter@v1
         if: always()
         with:
           name: Tests - Smoke
-          path: build/reports/tests/customTest/*.xml
-          reporter: junit
+          path: build/test-results/customTest/*.xml
+          reporter: java-unit
           fail-on-error: false
 
       - name: Clean build directory
@@ -99,7 +99,7 @@ jobs:
         with:
           name: Tests
           path: build/test-results/customTest/*.xml
-          reporter: junit
+          reporter: java-unit
           fail-on-error: false
 
 permissions:

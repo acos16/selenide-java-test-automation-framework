@@ -98,6 +98,11 @@ tasks.register('customTest', Test) {
 
     }
 
+    reports {
+        junitXml.enabled = true
+        html.enabled = true
+    }
+
     // Print included classes for debugging
     doLast {
         fileTree('src/test/java').matching {
