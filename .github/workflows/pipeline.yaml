@@ -26,7 +26,7 @@ jobs:
           java-version: '17'
 
       - name: Run smoke tests
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/gradle-setup-action@v1
         with:
           gradle-version: '8.1.1'
           generate-job-summary: false
@@ -41,7 +41,7 @@ jobs:
           path: build/reports/tests/customTest  # Path to HTML reports for smoke tests
 
       - name: Clean build directory
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/gradle-setup-action@v1
         with:
           gradle-version: '8.1.1'
           generate-job-summary: false
@@ -49,7 +49,7 @@ jobs:
             cleanBuildDir
 
       - name: Run regression tests
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/gradle-setup-action@v1
         with:
           gradle-version: '8.1.1'
           generate-job-summary: false
