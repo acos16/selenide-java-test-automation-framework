@@ -27,6 +27,9 @@ on:
         options:
           - chrome
           - firefox
+env:
+  DEFAULT_ENV: dev
+  DEFAULT_BROWSER: chrome
 
 jobs:
   build:
@@ -60,7 +63,7 @@ jobs:
 
       - name: Run smoke tests
         #run: ./gradlew customTest -PsuiteType=smoke
-        run: ./gradlew customTest -PsuiteType=smoke -Denv=${{ github.event.inputs.environment }} -Dbrowser=${{ github.event.inputs.browser }}
+        run: ./gradlew customTest -PsuiteType=smoke -Denv=${{ github.event.inputs.environment || env.DEFAULT_ENV }} -Dbrowser=${{ github.event.inputs.browser || env.DEFAULT_BROWSER  }}
 
       - name: Upload smoke test results
         if: always()
@@ -74,7 +77,7 @@ jobs:
 
       - name: Run regression tests
         #run: ./gradlew customTest -PsuiteType=regression -Dbrowser=chrome
-        run: ./gradlew customTest -PsuiteType=regression -Denv=${{ github.event.inputs.environment }} -Dbrowser=${{ github.event.inputs.browser }}
+        run: ./gradlew customTest -PsuiteType=regression -Denv=${{ github.event.inputs.environment || env.DEFAULT_ENV }} -Dbrowser=${{ github.event.inputs.browser || env.DEFAULT_BROWSER  }}
 
       - name: Upload regression test results
         if: always()
