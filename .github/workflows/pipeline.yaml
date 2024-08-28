@@ -26,39 +26,24 @@ jobs:
           java-version: '17'
 
       - name: Run smoke tests
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.1.1'
-          generate-job-summary: false
-          run: |
-            customTest -PsuiteType=smoke
+        run: ./gradlew customTest -PsuiteType=smoke
 
       - name: Upload smoke test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: smoke-test-results
-          path: build/reports/tests/customTest  # Path to HTML reports for smoke tests
+          path: build/reports/tests/customTest  
 
       - name: Clean build directory
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.1.1'
-          generate-job-summary: false
-          run: |
-            cleanBuildDir
+        run: ./gradlew cleanBuildDir
 
       - name: Run regression tests
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.1.1'
-          generate-job-summary: false
-          run: |
-            customTest -PsuiteType=regression -Dbrowser=chrome
+        run: ./gradlew customTest -PsuiteType=regression -Dbrowser=chrome
 
       - name: Upload regression test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: regression-test-results
-          path: build/reports/tests/customTest  # Path to HTML reports for regression tests
+          path: build/reports/tests/customTest
