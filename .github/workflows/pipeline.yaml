@@ -104,5 +104,5 @@ permissions:
   id-token: write
   contents: read
   checks: write
-  actions: writew
+  actions: write
 
