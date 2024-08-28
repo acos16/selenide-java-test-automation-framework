@@ -63,7 +63,7 @@ jobs:
 
       - name: Upload PMD report
         if: always()
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@latest
         with:
           path: build/reports/pmd/
           retention-days: 7
@@ -103,3 +103,6 @@ jobs:
     permissions:
       pages: write
       id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
