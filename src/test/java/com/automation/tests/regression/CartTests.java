@@ -6,7 +6,6 @@ import com.automation.base.BaseTest;
 import com.automation.config.EnvironmentLoader;
 import com.automation.pages.InventoryPage;
 import com.automation.utils.Utils;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /** Test class that contains tests for the inventory page functionality. */
@@ -15,7 +14,6 @@ class CartTests implements BaseTest {
   private final InventoryPage inventoryPage = new InventoryPage();
 
   @Test
-  @Tag("regression")
   void verifyItemCanBeAddedToCart() {
     // Test is applicable only on dev environment
     assertEquals("dev", EnvironmentLoader.readEnvironmentFromProperties());
