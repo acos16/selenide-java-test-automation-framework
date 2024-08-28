@@ -9,6 +9,7 @@ import com.automation.entity.User;
 import com.automation.pages.InventoryPage;
 import com.automation.pages.LoginPage;
 import com.automation.utils.Utils;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /** Test class that contains tests for the Login page. */
@@ -20,6 +21,7 @@ class LoginTests implements BaseTest {
   private final User user = UsersLoader.getStandardUser();
 
   @Test
+  @Tag("smoke")
   void verifyLoginToPageIsSuccessfulWithStandardUser() {
     // Test is applicable only on dev environment
     assertEquals("dev", EnvironmentLoader.readEnvironmentFromProperties());
