@@ -30,7 +30,7 @@ jobs:
         with:
           gradle-version: '8.1.1'
           generate-job-summary: false
-          arguments: |
+          run: |
             customTest -PsuiteType=smoke
 
       - name: Upload smoke test results
@@ -45,7 +45,7 @@ jobs:
         with:
           gradle-version: '8.1.1'
           generate-job-summary: false
-          arguments: |
+          run: |
             cleanBuildDir
 
       - name: Run regression tests
@@ -53,7 +53,7 @@ jobs:
         with:
           gradle-version: '8.1.1'
           generate-job-summary: false
-          arguments: |
+          run: |
             customTest -PsuiteType=regression -Dbrowser=chrome
 
       - name: Upload regression test results
