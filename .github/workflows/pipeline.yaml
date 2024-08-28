@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: smoke-test-results
-          path: build/reports/tests/customTest  
+          path: build/reports/tests/customTest
 
       - name: Clean build directory
         run: ./gradlew cleanBuildDir
