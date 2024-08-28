@@ -1,8 +1,15 @@
 plugins {
     id 'java'
     id 'application'
+    id 'com.diffplug.spotless' version '6.19.0'
 }
 
+spotless {
+    java {
+        target 'src/**/*.java'
+        googleJavaFormat()
+    }
+}
 repositories {
     mavenCentral()
 }
