@@ -20,11 +20,11 @@ class CartTests implements BaseTest {
     assertEquals("dev", EnvironmentLoader.readEnvironmentFromProperties());
 
     inventoryPage.loadPage(inventoryPage.getPageUrl());
-    PageWaiter.waitForPageReady();
+    PageWaiter.getWaiter().waitForDocumentCompleteState();
 
     var addToCartButtons = inventoryPage.getAddToCartButton();
-    PageWaiter.getWaiter().waitForDocumentCompleteState();
-    // Assert that there are items to add
+    PageWaiter.getWaiter().waitForAngularRequestsToFinish();
+
     if (addToCartButtons.size() == 0) throw new AssertionError("No items available");
     addToCartButtons.get(Utils.getRandomNumber(addToCartButtons.size())).click();
 

@@ -83,11 +83,11 @@ jobs:
 
   # previsous implementation
 
-      - name: Clean build directory
-        run: ./gradlew cleanBuildDir
+      - name: Clean previous test results
+        run: rm -rf build/test-results/* build/reports/tests/customTest/* || true
 
       - name: Run regression tests
-        run: ./gradlew customTest -PsuiteType=regression -Denv=${{ github.event.inputs.environment || env.DEFAULT_ENV }} -Dbrowser=${{ github.event.inputs.browser || env.DEFAULT_BROWSER }}
+        run: ./gradlew -i customTest -PsuiteType=regression -Denv=${{ github.event.inputs.environment || env.DEFAULT_ENV }} -Dbrowser=${{ github.event.inputs.browser || env.DEFAULT_BROWSER }}
 
       - name: Upload regression test results as artifacts
         if: always()
