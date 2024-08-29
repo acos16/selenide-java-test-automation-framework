@@ -22,6 +22,9 @@ public abstract class BasePage {
   protected BasePage() {
     Configuration.baseUrl = EnvironmentLoader.getEnvironment();
     Configuration.headless = true;
+
+    Configuration.screenshots = true;
+    Configuration.reportsFolder = "build/reports/tests/screenshots";
   }
 
   /**
