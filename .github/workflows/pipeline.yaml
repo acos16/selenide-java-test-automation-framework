@@ -75,7 +75,7 @@ jobs:
         uses: dorny/test-reporter@v1
         if: always()
         with:
-          name: Smoke Tests
+          name: Smoke Tests-${{ github.run_id }}
           path: build/test-results/customTest/*.xml
           reporter: java-junit
           fail-on-error: false
@@ -97,7 +97,7 @@ jobs:
         uses: dorny/test-reporter@v1
         if: always()
         with:
-          name: Regression Tests
+          name: Regression Tests-${{ github.run_id }}
           path: build/test-results/customTest/*.xml
           reporter: java-junit
           fail-on-error: false
