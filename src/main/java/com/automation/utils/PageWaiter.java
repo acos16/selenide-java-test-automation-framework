@@ -1,6 +1,5 @@
 package com.automation.utils;
 
-import com.automation.base.BasePage;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import java.time.Duration;
@@ -64,5 +63,4 @@ public class PageWaiter {
     }
     return this;
   }
-
 }
