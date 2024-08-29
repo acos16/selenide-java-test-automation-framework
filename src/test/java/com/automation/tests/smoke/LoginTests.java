@@ -24,16 +24,12 @@ class LoginTests implements BaseTest {
     // Test is applicable only on dev environment
     assertEquals("dev", EnvironmentLoader.readEnvironmentFromProperties());
 
-    // Go to start page - login page
     loginPage.loadPage(loginPage.getPageUrl());
 
-    // Login in with given user
     loginPage.login(user);
 
-    // Assert that after login inventory page is displayed
     assertTrue(inventoryPage.isDisplayed());
 
-    // Log out
     inventoryPage.getSideBarMenu().openMenu();
     inventoryPage.getSideBarMenu().logout();
   }
@@ -43,19 +39,14 @@ class LoginTests implements BaseTest {
     // Test is applicable only on dev environment
     assertEquals("dev", EnvironmentLoader.readEnvironmentFromProperties());
 
-    // Go to start page - login page
     loginPage.loadPage(loginPage.getPageUrl());
 
-    // Define invalid credentials for user
     User invalidUser = new User();
     invalidUser.setUsername("test");
     invalidUser.setPassword(Utils.getComplexPassword());
 
-    // Login with invalid user
     loginPage.login(invalidUser);
 
-    // Assert that login was not successful. A successful login redirects the user to the Inventory
-    // Page
     assertFalse(inventoryPage.isDisplayed(), "The inventory page should not be displayed.");
   }
 }

@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 import com.automation.base.BasePage;
 import com.automation.config.PagesLoader;
+import com.automation.uiblocks.Header;
 import com.automation.uiblocks.SidebarMenu;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -20,6 +21,7 @@ public class InventoryPage extends BasePage {
   private final SidebarMenu sideBarMenu = new SidebarMenu();
   private final ElementsCollection addToCartButtons = $$("button[id^='add-to-cart']");
   private final SelenideElement shoppingCart = $(".shopping_cart_badge");
+  private final Header header = new Header();
 
   /**
    * Gets the page's title
@@ -105,6 +107,6 @@ public class InventoryPage extends BasePage {
    * @return the text representing the number of items in the shopping cart.
    */
   public String getItemsInShoppingCart() {
-    return shoppingCart.text();
+    return header.getCartItemCount();
   }
 }

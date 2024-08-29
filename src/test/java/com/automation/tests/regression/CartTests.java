@@ -18,16 +18,13 @@ class CartTests implements BaseTest {
     // Test is applicable only on dev environment
     assertEquals("dev", EnvironmentLoader.readEnvironmentFromProperties());
 
-    // Navigate to Inventory Page
     inventoryPage.loadPage(inventoryPage.getPageUrl());
 
-    // Get all 'Add to cart' buttons
     var addToCartButtons = inventoryPage.getAddToCartButton();
     // Assert that there are items to add
     if (addToCartButtons.size() == 0) throw new AssertionError("No items available");
     addToCartButtons.get(Utils.getRandomNumber(addToCartButtons.size())).click();
 
-    // Assert that the cart badge shows 1 item
     assertEquals(
         "1",
         inventoryPage.getItemsInShoppingCart(),
