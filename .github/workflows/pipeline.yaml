@@ -58,17 +58,17 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: pmd-report
+          name: pmd-report-${{ github.run_id }}
           path: build/reports/pmd/
 
       - name: Run smoke tests
-        run: ./gradlew customTest -PsuiteType=smoke -Denv=${{ github.event.inputs.environment || env.DEFAULT_ENV }} -Dbrowser=${{ github.event.inputs.browser || env.DEFAULT_BROWSER  }}
+        run: ./gradlew customTest -PsuiteType=smoke -Denv=${{ github.event.inputs.environment || env.DEFAULT_ENV }} -Dbrowser=${{ github.event.inputs.browser || env.DEFAULT_BROWSER }}
 
       - name: Upload smoke test results as artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: smoke-test-results
+          name: smoke-test-results-${{ github.run_id }}
           path: build/reports/tests/customTest
 
       - name: Test report smoke tests
@@ -84,13 +84,13 @@ jobs:
         run: ./gradlew cleanBuildDir
 
       - name: Run regression tests
-        run: ./gradlew customTest -PsuiteType=regression -Denv=${{ github.event.inputs.environment || env.DEFAULT_ENV }} -Dbrowser=${{ github.event.inputs.browser || env.DEFAULT_BROWSER  }}
+        run: ./gradlew customTest -PsuiteType=regression -Denv=${{ github.event.inputs.environment || env.DEFAULT_ENV }} -Dbrowser=${{ github.event.inputs.browser || env.DEFAULT_BROWSER }}
 
       - name: Upload regression test results as artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: regression-test-results
+          name: regression-test-results-${{ github.run_id }}
           path: build/reports/tests/customTest
 
       - name: Test report regression tests
@@ -107,4 +107,3 @@ permissions:
   contents: read
   checks: write
   actions: write
-
