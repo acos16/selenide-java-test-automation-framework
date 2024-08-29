@@ -58,13 +58,6 @@ jobs:
       - name: Run PMD
         run: ./gradlew pmdMain pmdTest
 
-      - name: Add PMD Report to Job Summary
-        run: |
-          echo "### PMD Report Summary" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          cat build/reports/pmd/main.html | grep "<file" | sed 's/.*name="\(.*\)" errors="\([0-9]*\)".*/\1: \2 errors/' >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-
       - name: Run smoke tests
         run: ./gradlew customTest -PsuiteType=smoke -Denv=${{ github.event.inputs.environment || env.DEFAULT_ENV }} -Dbrowser=${{ github.event.inputs.browser || env.DEFAULT_BROWSER }}
 
@@ -72,7 +65,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: smoke-test-results-${{ github.run_number }}
+          name: smoke-test-results
           path: build/reports/tests/customTest
 
       - name: Upload screenshots for smoke tests
@@ -82,12 +75,21 @@ jobs:
           name: smoke-test-screenshots
           path: build/reports/tests/screenshots
 
-      - name: Add Smoke Test Summary to Job Summary
-        run: |
-          echo "### Smoke Test Summary" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          cat build/reports/tests/customTest/index.html >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+      - name: Smoke Tests Summary
+        uses: test-summary/action@v2
+        with:
+          paths: "build/reports/tests/customTest/TEST-*.xml"
+          output: smoke-test-summary.md
+        if: always()
+
+      - name: Upload test summary
+        uses: actions/upload-artifact@v3
+        with:
+          name: smoke-test-summary
+          path: smoke-test-summary.md
+        if: always()
+
+  # previsous implementation
 
       - name: Clean build directory
         run: ./gradlew cleanBuildDir
