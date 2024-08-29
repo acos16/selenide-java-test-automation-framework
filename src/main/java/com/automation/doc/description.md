@@ -128,6 +128,11 @@ The CI Pipeline ensures that tests are executed consistently with each build.
 5. Run tests: this step runs the tests using the Gradle `customTest` task.
 6. Upload reports and test results: this step uploads artifacts.
 
+[dorny test reporter](https://github.com/dorny/test-reporter) is used to display the test results. Please notice that there are some GitHub  
+[limitations](https://github.com/dorny/test-reporter?tab=readme-ov-file#github-limitations), among which I will mention:
+* manually triggering the build will not display the test results
+* for scheduled builds the test results will not be displayed
+* it is not possible to specify which test report should belong to which workflow
 
 ## Code Quality
 
