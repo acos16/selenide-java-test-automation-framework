@@ -13,7 +13,7 @@ import org.openqa.selenium.WebDriverException;
 
 public class PageWaiter {
 
-  public static final Logger log = LogManager.getLogger(BasePage.class);
+  public static final Logger log = LogManager.getLogger(PageWaiter.class);
 
   private PageWaiter() {}
 
@@ -65,7 +65,4 @@ public class PageWaiter {
     return this;
   }
 
-  public static void waitForPageReady() {
-    getWaiter().waitForAngularRequestsToFinish().waitForDocumentCompleteState();
-  }
 }

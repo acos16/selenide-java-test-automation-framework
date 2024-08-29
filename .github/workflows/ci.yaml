@@ -103,12 +103,12 @@ jobs:
           name: regression-test-screenshots
           path: build/reports/tests/screenshots
 
-      - name: Add Regression Test Summary to Job Summary
-        run: |
-          echo "### Regression Test Summary" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          ./gradlew testReport --tests "*regression*" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+      - name: Regression Test Summary to Job Summary
+        uses: test-summary/action@dist
+          with:
+            paths: build/reports/tests/customTest/*.xml
+            show: "all"
+          if: always()
 
 permissions:
   id-token: write
