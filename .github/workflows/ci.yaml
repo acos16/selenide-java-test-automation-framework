@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: Test CI
 
 on:
   push:
@@ -62,7 +62,7 @@ jobs:
         run: |
           echo "### PMD Report Summary" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          cat build/reports/pmd/main.xml | grep "<file" | sed 's/.*name="\(.*\)" errors="\([0-9]*\)".*/\1: \2 errors/' >> $GITHUB_STEP_SUMMARY
+          cat build/reports/pmd/main.html | grep "<file" | sed 's/.*name="\(.*\)" errors="\([0-9]*\)".*/\1: \2 errors/' >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
 
       - name: Run smoke tests
@@ -86,7 +86,7 @@ jobs:
         run: |
           echo "### Smoke Test Summary" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          ./gradlew testReport --tests "*smoke*" >> $GITHUB_STEP_SUMMARY
+          cat build/reports/tests/customTest/index.html >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
 
       - name: Clean build directory
