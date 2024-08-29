@@ -71,9 +71,13 @@ tasks.register('customTest', Test) {
 
     useJUnitPlatform()
 
-    //Set default browser to chrome
-    def defaultBrowser = 'chrome'
+    //Read browser value from properties file or set default browser to chrome if not specified
+    def defaultBrowser = readBrowserFromProperties()
     def browser = System.getProperty('browser', defaultBrowser)
+
+    if (browser == null || browser.isEmpty()) {
+        browser = defaultBrowser
+    }
     systemProperty 'browser', browser
     println("Running tests on browser: $browser")
 
@@ -136,6 +140,25 @@ def readEnvironmentFromProperties() {
         println "Error reading gradle.properties file: $e.message"
     }
     return defaultEnvironment
+}
+
+def readBrowserFromProperties() {
+    def properties = new Properties()
+    def defaultBrowser = 'chrome' // Default value
+    try {
+        def gradlePropertiesFile = file('gradle.properties')
+        if (gradlePropertiesFile.exists()) {
+            properties.load(new FileInputStream(gradlePropertiesFile))
+            def browser = properties.getProperty('browser', defaultBrowser)
+            if (browser == null || browser.isEmpty()) {
+                browser = defaultBrowser
+            }
+            return browser
+        }
+    } catch (IOException e) {
+        println "Error reading gradle.properties file: $e.message"
+    }
+    return defaultBrowser
 }
 
 tasks.register('cleanBuildDir', Delete) {

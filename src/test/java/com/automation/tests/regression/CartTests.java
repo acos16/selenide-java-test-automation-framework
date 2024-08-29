@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.automation.base.BaseTest;
 import com.automation.config.EnvironmentLoader;
 import com.automation.pages.InventoryPage;
+import com.automation.utils.PageWaiter;
 import com.automation.utils.Utils;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +20,10 @@ class CartTests implements BaseTest {
     assertEquals("dev", EnvironmentLoader.readEnvironmentFromProperties());
 
     inventoryPage.loadPage(inventoryPage.getPageUrl());
+    PageWaiter.waitForPageReady();
 
     var addToCartButtons = inventoryPage.getAddToCartButton();
+    PageWaiter.getWaiter().waitForDocumentCompleteState();
     // Assert that there are items to add
     if (addToCartButtons.size() == 0) throw new AssertionError("No items available");
     addToCartButtons.get(Utils.getRandomNumber(addToCartButtons.size())).click();
