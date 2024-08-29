@@ -1,6 +1,7 @@
 package com.automation.base;
 
 import com.automation.extensions.CustomTestWatcher;
+import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 /**
@@ -11,4 +12,5 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * methods for tests.
  */
 @ExtendWith({CustomTestWatcher.class})
+@ExtendWith({ScreenShooterExtension.class})
 public interface BaseTest {}

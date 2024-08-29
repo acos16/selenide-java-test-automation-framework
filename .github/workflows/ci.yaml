@@ -76,17 +76,9 @@ jobs:
           path: build/reports/tests/screenshots
 
       - name: Smoke Tests Summary
-        uses: test-summary/action@v2
+        uses: test-summary/action@dist
         with:
-          paths: "build/reports/tests/customTest/TEST-*.xml"
-          output: smoke-test-summary.md
-        if: always()
-
-      - name: Upload test summary
-        uses: actions/upload-artifact@v3
-        with:
-          name: smoke-test-summary
-          path: smoke-test-summary.md
+          paths: build/reports/tests/customTest/*.xml
         if: always()
 
   # previsous implementation
