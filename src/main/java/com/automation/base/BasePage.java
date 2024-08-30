@@ -9,6 +9,7 @@ import java.util.Objects;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 /** BasePage contains common page functionalities that can be reused across multiple pages */
 public abstract class BasePage {
@@ -25,6 +26,9 @@ public abstract class BasePage {
 
     Configuration.screenshots = true;
     Configuration.reportsFolder = "build/reports/tests/screenshots";
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("--disable-search-engine-choice-screen");
+    Configuration.browserCapabilities = options;
   }
 
   /**

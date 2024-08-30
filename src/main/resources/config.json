@@ -15,6 +15,7 @@
   ],
   "pages": {
     "inventory": "https://www.saucedemo.com/inventory.html",
-    "products": "https://saucelabs.com/products"
+    "products": "https://saucelabs.com/products",
+    "elements": "https://demoqa.com/elements"
   }
 }

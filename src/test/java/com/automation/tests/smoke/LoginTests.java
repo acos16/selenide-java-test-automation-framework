@@ -3,13 +3,13 @@ package com.automation.tests.smoke;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.automation.base.BaseTest;
-import com.automation.config.EnvironmentLoader;
 import com.automation.config.UsersLoader;
 import com.automation.entity.User;
 import com.automation.pages.InventoryPage;
 import com.automation.pages.LoginPage;
 import com.automation.utils.Utils;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIf;
 
 /** Test class that contains tests for the Login page. */
 class LoginTests implements BaseTest {
@@ -20,9 +20,8 @@ class LoginTests implements BaseTest {
   private final User user = UsersLoader.getStandardUser();
 
   @Test
+  @DisabledIf("isNotDevEnv")
   void verifyLoginToPageIsSuccessfulWithStandardUser() {
-    // Test is applicable only on dev environment
-    assertEquals("dev", EnvironmentLoader.readEnvironmentFromProperties());
 
     loginPage.loadPage(loginPage.getPageUrl());
 
@@ -35,9 +34,8 @@ class LoginTests implements BaseTest {
   }
 
   @Test
+  @DisabledIf("isNotDevEnv")
   void verifyInventoryPageNotDisplayedWhenUsingInvalidUser() {
-    // Test is applicable only on dev environment
-    assertEquals("dev", EnvironmentLoader.readEnvironmentFromProperties());
 
     loginPage.loadPage(loginPage.getPageUrl());
 

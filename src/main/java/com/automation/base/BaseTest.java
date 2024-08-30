@@ -1,5 +1,6 @@
 package com.automation.base;
 
+import com.automation.config.EnvironmentLoader;
 import com.automation.extensions.CustomTestWatcher;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,4 +14,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
  */
 @ExtendWith({CustomTestWatcher.class})
 @ExtendWith({ScreenShooterExtension.class})
-public interface BaseTest {}
+public interface BaseTest {
+
+  default boolean isNotQaEnv() {
+    return !EnvironmentLoader.readEnvironmentFromProperties().equalsIgnoreCase("qa");
+  }
+
+  default boolean isNotDevEnv() {
+    return !EnvironmentLoader.readEnvironmentFromProperties().equalsIgnoreCase("dev");
+  }
+}
