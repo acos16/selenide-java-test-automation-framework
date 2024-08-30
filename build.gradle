@@ -61,12 +61,12 @@ test {
 tasks.register('customTest', Test) {
     // Read the environment from properties file or default it if not specified
     def defaultEnvironment = readEnvironmentFromProperties()
-    def environment = System.getProperty('environment', defaultEnvironment)
+    def environment = System.getProperty('env', defaultEnvironment)
 
     if (environment == null || environment.isEmpty()) {
         environment = defaultEnvironment
     }
-    systemProperty 'environment', environment
+    systemProperty 'env', environment
     println "Environment set for testing: $environment"
 
     useJUnitPlatform()
@@ -125,7 +125,7 @@ def readEnvironmentFromProperties() {
         def gradlePropertiesFile = file('gradle.properties')
         if (gradlePropertiesFile.exists()) {
             properties.load(new FileInputStream(gradlePropertiesFile))
-            def environment = properties.getProperty('environment', defaultEnvironment)
+            def environment = properties.getProperty('env', defaultEnvironment)
             if (environment == null || environment.isEmpty()) {
                 environment = defaultEnvironment
             }

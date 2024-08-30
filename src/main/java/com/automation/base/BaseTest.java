@@ -16,12 +16,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 public interface BaseTest {
 
   default boolean isNotQaEnv() {
-    String env = System.getProperty("environment", "dev");
+    String env = System.getProperty("env", "dev");
     return !env.equalsIgnoreCase("qa");
   }
 
   default boolean isNotDevEnv() {
-    String env = System.getProperty("environment", "dev");
+    String env = System.getProperty("env", "dev");
     return !env.equalsIgnoreCase("dev");
   }
 }
