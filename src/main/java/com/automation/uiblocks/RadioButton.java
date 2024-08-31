@@ -3,6 +3,7 @@ package com.automation.uiblocks;
 import static com.codeborne.selenide.Selenide.$;
 
 import com.automation.utils.PageWaiter;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
 /** Represents the RadioButton UI block on the Elements page. Applicable only to QA environment! */
@@ -22,7 +23,8 @@ public class RadioButton {
   }
 
   public void selectImpressive() {
-    impressiveRadio.parent().click();
+    impressiveRadio.scrollIntoView(true);
+    impressiveRadio.shouldBe(Condition.visible).shouldBe(Condition.enabled).click();
   }
 
   public boolean isYesSelected() {

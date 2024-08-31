@@ -7,6 +7,7 @@ import com.automation.base.BasePage;
 import com.automation.config.PagesLoader;
 import com.automation.uiblocks.Header;
 import com.automation.uiblocks.SidebarMenu;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
@@ -89,7 +90,7 @@ public class InventoryPage extends BasePage {
    * @return the collection of "Add to Cart" buttons.
    */
   public ElementsCollection getAddToCartButton() {
-    return addToCartButtons;
+    return addToCartButtons.filter(Condition.visible).filter(Condition.enabled);
   }
 
   /**

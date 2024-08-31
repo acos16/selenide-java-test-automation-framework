@@ -6,6 +6,7 @@ import com.automation.base.BaseTest;
 import com.automation.pages.InventoryPage;
 import com.automation.utils.PageWaiter;
 import com.automation.utils.Utils;
+import com.codeborne.selenide.CollectionCondition;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIf;
 
@@ -21,7 +22,7 @@ class CartTests implements BaseTest {
     PageWaiter.getWaiter().waitForDocumentCompleteState();
 
     var addToCartButtons = inventoryPage.getAddToCartButton();
-    PageWaiter.getWaiter().waitForAngularRequestsToFinish();
+    addToCartButtons.shouldHave(CollectionCondition.sizeGreaterThan(0));
 
     if (addToCartButtons.size() == 0) throw new AssertionError("No items available");
     addToCartButtons.get(Utils.getRandomNumber(addToCartButtons.size())).click();
