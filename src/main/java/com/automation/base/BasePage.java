@@ -124,10 +124,13 @@ public abstract class BasePage {
       log.debug("User is not logged in. Logging in as standard user.");
       LoginPage loginPage = new LoginPage();
       Selenide.open(loginPage.getPageUrl());
+      PageWaiter.getWaiter().waitForDocumentCompleteState().waitForAngularRequestsToFinish();
+      log.debug("Navigating to page {}", loginPage.getPageUrl());
 
       if (loginPage.isDisplayed()) {
         loginPage.loginAsStandardUser();
         Selenide.open(getPageUrl());
+        log.debug("Open page {} ", getPageUrl());
 
         if (isLoggedIn()) {
           log.debug("{} was successfully loaded.", getPageUrl());
