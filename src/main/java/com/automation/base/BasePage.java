@@ -103,6 +103,7 @@ public abstract class BasePage {
 
     log.debug("Loading: {}", getPageUrl());
     Selenide.open(url);
+    PageWaiter.getWaiter().waitForDocumentCompleteState().waitForAngularRequestsToFinish();
 
     if (getCurrentUrl().equals(url)) {
       log.debug("{} was successfully loaded.", url);
@@ -129,7 +130,9 @@ public abstract class BasePage {
 
       if (loginPage.isDisplayed()) {
         loginPage.loginAsStandardUser();
+        PageWaiter.getWaiter().waitForDocumentCompleteState().waitForAngularRequestsToFinish();
         Selenide.open(getPageUrl());
+        PageWaiter.getWaiter().waitForDocumentCompleteState().waitForAngularRequestsToFinish();
         log.debug("Open page {} ", getPageUrl());
 
         if (isLoggedIn()) {
