@@ -23,13 +23,26 @@ public abstract class BasePage {
 
   protected BasePage() {
     Configuration.baseUrl = EnvironmentLoader.getEnvironment();
-    Configuration.headless = false;
+    Configuration.headless = true;
 
     Configuration.screenshots = true;
     Configuration.reportsFolder = "build/reports/tests/screenshots";
-    ChromeOptions options = new ChromeOptions();
-    options.addArguments("--disable-search-engine-choice-screen");
-    Configuration.browserCapabilities = options;
+    String browser = System.getProperty("browser", "chrome");
+    switch (browser.toLowerCase()) {
+      case "chrome" -> {
+        Configuration.browser = "chrome";
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-search-engine-choice-screen");
+        options.addArguments("--disable-gpu"); // Temporarily needed if running on Windows
+        options.addArguments("--no-sandbox"); // Bypass OS security model
+        options.addArguments("--disable-dev-shm-usage"); // Overcome limited resource problems
+        options.addArguments("--disable-setuid-sandbox");
+        options.addArguments("--disable-software-rasterizer");
+        Configuration.browserCapabilities = options;
+      }
+      case "firefox" -> Configuration.browser = "firefox";
+      default -> throw new IllegalArgumentException("Unsupported browser: " + browser);
+    }
   }
 
   /**
