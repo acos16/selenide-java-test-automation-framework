@@ -71,7 +71,7 @@ tasks.register('customTest', Test) {
 
     useJUnitPlatform()
 
-    //Read browser value from properties file or set default browser to chrome if not specified
+    // Read browser value from properties file or set default browser to chrome if not specified
     def defaultBrowser = readBrowserFromProperties()
     def browser = System.getProperty('browser', defaultBrowser)
 
@@ -89,23 +89,24 @@ tasks.register('customTest', Test) {
     doFirst {
         def includePattern
         if (suiteType == 'smoke') {
-            includePattern = '**/SmokeTestSuite*.class'
+            includePattern = '**/tests/smoke/**/*Test*.class'
         } else if (suiteType == 'regression') {
-            includePattern = '**/RegressionTestSuite*.class'
+            includePattern = '**/tests/regression/**/*Test*.class'
         } else if (suiteType == 'all') {
             includePattern = '**/tests/**/*Test*.class'
         } else {
             throw new GradleException("Unknown suite type: ${suiteType}. Please specify 'smoke', 'regression', or 'all'.")
         }
         include(includePattern)
+        exclude('**/suites/SmokeTestSuite*.class', '**/suites/RegressionTestSuite*.class')
         println "Included test classes for suite: $suiteType"
-
     }
 
     // Print included classes for debugging
     doLast {
         fileTree('src/test/java').matching {
             include '**/*.class'
+            exclude '**/suites/SmokeTestSuite*.class', '**/suites/RegressionTestSuite*.class'
         }.each {
             println it
         }

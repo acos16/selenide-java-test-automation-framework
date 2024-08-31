@@ -23,7 +23,7 @@ public class RadioButton {
   }
 
   public void selectImpressive() {
-    impressiveRadio.scrollIntoView(true);
+    PageWaiter.getWaiter().waitForAngularRequestsToFinish().waitForDocumentCompleteState();
     impressiveRadio.shouldBe(Condition.visible).shouldBe(Condition.enabled).click();
   }
 

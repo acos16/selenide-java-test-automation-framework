@@ -21,7 +21,7 @@ class CartTests implements BaseTest {
     inventoryPage.loadPage(inventoryPage.getPageUrl());
     PageWaiter.getWaiter().waitForDocumentCompleteState();
 
-    var addToCartButtons = inventoryPage.getAddToCartButton();
+    var addToCartButtons = inventoryPage.getAddToCartButtons();
     addToCartButtons.shouldHave(CollectionCondition.sizeGreaterThan(0));
 
     if (addToCartButtons.size() == 0) throw new AssertionError("No items available");

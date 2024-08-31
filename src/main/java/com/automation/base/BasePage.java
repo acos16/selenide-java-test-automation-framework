@@ -2,6 +2,7 @@ package com.automation.base;
 
 import com.automation.config.EnvironmentLoader;
 import com.automation.pages.LoginPage;
+import com.automation.utils.PageWaiter;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
@@ -22,7 +23,7 @@ public abstract class BasePage {
 
   protected BasePage() {
     Configuration.baseUrl = EnvironmentLoader.getEnvironment();
-    Configuration.headless = true;
+    Configuration.headless = false;
 
     Configuration.screenshots = true;
     Configuration.reportsFolder = "build/reports/tests/screenshots";
@@ -94,6 +95,7 @@ public abstract class BasePage {
       log.debug("{} was successfully loaded.", url);
     } else {
       log.info(getClass().getSimpleName(), " {} was not loaded. Url differs from expected ");
+      PageWaiter.getWaiter().waitForDocumentCompleteState().waitForAngularRequestsToFinish();
       navigateToPageWithLogin(); // will login as standard user
     }
   }
