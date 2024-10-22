@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.automation.base.BaseTest;
 import com.automation.pages.InventoryPage;
-import com.automation.utils.PageWaiter;
+import com.automation.utils.PageSyncHelper;
 import com.automation.utils.Utils;
 import com.codeborne.selenide.CollectionCondition;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ class CartTests implements BaseTest {
   @DisabledIf("isNotDevEnv")
   void verifyItemCanBeAddedToCart() {
     inventoryPage.loadPage(inventoryPage.getPageUrl());
-    PageWaiter.getWaiter().waitForDocumentCompleteState();
+    PageSyncHelper.create().waitForDocumentReady();
 
     var addToCartButtons = inventoryPage.getAddToCartButtons();
     addToCartButtons.shouldHave(CollectionCondition.sizeGreaterThan(0));

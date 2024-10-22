@@ -10,17 +10,17 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
-public class PageWaiter {
+public class PageSyncHelper {
 
-  public static final Logger log = LogManager.getLogger(PageWaiter.class);
+  public static final Logger log = LogManager.getLogger(PageSyncHelper.class);
 
-  private PageWaiter() {}
+  private PageSyncHelper() {}
 
-  public static PageWaiter getWaiter() {
-    return new PageWaiter();
+  public static PageSyncHelper create() {
+    return new PageSyncHelper();
   }
 
-  public PageWaiter waitForAngularRequestsToFinish() {
+  public PageSyncHelper waitForAngularToComplete() {
     try {
       Selenide.Wait()
           .withTimeout(Duration.ofMinutes(1))
@@ -45,7 +45,7 @@ public class PageWaiter {
     return this;
   }
 
-  public PageWaiter waitForDocumentCompleteState() {
+  public PageSyncHelper waitForDocumentReady() {
     try {
       Selenide.Wait()
           .withTimeout(Duration.ofSeconds(30))

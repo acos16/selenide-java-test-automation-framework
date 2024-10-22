@@ -7,7 +7,7 @@ import com.automation.base.BasePage;
 import com.automation.config.PagesLoader;
 import com.automation.uiblocks.Header;
 import com.automation.uiblocks.SidebarMenu;
-import com.automation.utils.PageWaiter;
+import com.automation.utils.PageSyncHelper;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -91,7 +91,7 @@ public class InventoryPage extends BasePage {
    * @return the collection of "Add to Cart" buttons.
    */
   public ElementsCollection getAddToCartButtons() {
-    PageWaiter.getWaiter().waitForAngularRequestsToFinish().waitForDocumentCompleteState();
+    PageSyncHelper.create().waitForAngularToComplete().waitForDocumentReady();
     return addToCartButtons.filter(Condition.visible).filter(Condition.enabled);
   }
 

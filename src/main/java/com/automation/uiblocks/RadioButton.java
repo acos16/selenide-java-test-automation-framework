@@ -2,7 +2,7 @@ package com.automation.uiblocks;
 
 import static com.codeborne.selenide.Selenide.$;
 
-import com.automation.utils.PageWaiter;
+import com.automation.utils.PageSyncHelper;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
@@ -15,7 +15,7 @@ public class RadioButton {
 
   public void selectRadioButtonPanel() {
     radioButtonPanel.click();
-    PageWaiter.getWaiter().waitForAngularRequestsToFinish();
+    PageSyncHelper.create().waitForAngularToComplete();
   }
 
   public void selectYes() {
@@ -23,7 +23,7 @@ public class RadioButton {
   }
 
   public void selectImpressive() {
-    PageWaiter.getWaiter().waitForAngularRequestsToFinish().waitForDocumentCompleteState();
+    PageSyncHelper.create().waitForAngularToComplete().waitForDocumentReady();
     impressiveRadio.parent().scrollIntoView(true);
     impressiveRadio.parent().shouldBe(Condition.visible).shouldBe(Condition.enabled).click();
   }

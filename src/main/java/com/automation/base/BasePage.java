@@ -2,7 +2,7 @@ package com.automation.base;
 
 import com.automation.config.EnvironmentLoader;
 import com.automation.pages.LoginPage;
-import com.automation.utils.PageWaiter;
+import com.automation.utils.PageSyncHelper;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
@@ -103,13 +103,13 @@ public abstract class BasePage {
 
     log.debug("Loading: {}", getPageUrl());
     Selenide.open(url);
-    PageWaiter.getWaiter().waitForDocumentCompleteState().waitForAngularRequestsToFinish();
+    PageSyncHelper.create().waitForDocumentReady().waitForAngularToComplete();
 
     if (getCurrentUrl().equals(url)) {
       log.debug("{} was successfully loaded.", url);
     } else {
       log.info(getClass().getSimpleName(), " {} was not loaded. Url differs from expected ");
-      PageWaiter.getWaiter().waitForDocumentCompleteState().waitForAngularRequestsToFinish();
+      PageSyncHelper.create().waitForDocumentReady().waitForAngularToComplete();
       navigateToPageWithLogin(); // will login as standard user
     }
   }
@@ -125,14 +125,14 @@ public abstract class BasePage {
       log.debug("User is not logged in. Logging in as standard user.");
       LoginPage loginPage = new LoginPage();
       Selenide.open(loginPage.getPageUrl());
-      PageWaiter.getWaiter().waitForDocumentCompleteState().waitForAngularRequestsToFinish();
+      PageSyncHelper.create().waitForDocumentReady().waitForAngularToComplete();
       log.debug("Navigating to page {}", loginPage.getPageUrl());
 
       if (loginPage.isDisplayed()) {
         loginPage.loginAsStandardUser();
-        PageWaiter.getWaiter().waitForDocumentCompleteState().waitForAngularRequestsToFinish();
+        PageSyncHelper.create().waitForDocumentReady().waitForAngularToComplete();
         Selenide.open(getPageUrl());
-        PageWaiter.getWaiter().waitForDocumentCompleteState().waitForAngularRequestsToFinish();
+        PageSyncHelper.create().waitForDocumentReady().waitForAngularToComplete();
         log.debug("Open page {} ", getPageUrl());
 
         if (isLoggedIn()) {
